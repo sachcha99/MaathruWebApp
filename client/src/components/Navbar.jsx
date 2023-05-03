@@ -1,12 +1,21 @@
 import React from 'react'
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-
+import LogoutIcon from '@mui/icons-material/Logout';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Avatar from '@mui/material/Avatar';
 import { Box } from '@mui/material';
+import Typography from '@mui/material/Typography';
+import Menu from '@mui/material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
+import Container from '@mui/material/Container';
+import Button from '@mui/material/Button';
+import MenuItem from '@mui/material/MenuItem';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom";
+import Badge from '@mui/material/Badge';
 
 const Navbar = () => {
 
@@ -25,7 +34,7 @@ const Navbar = () => {
     align-items: center;
     justify-content: space-between;
     margin-bottom: -30px;
-    padding-right:10px;
+    padding-right:40px;
 `;
 
     const Left = styled.div`
@@ -68,15 +77,44 @@ const Navbar = () => {
     `;
 
     const LogoImg = styled.img`
-    width: 100px;
+    width: 70px;
+    padding-left: 20px;
 `;
+
+    const token = localStorage.getItem("token") || null;
+    const userInfoDetails = JSON.parse(localStorage.getItem("userInfo"));
+    const dispatch = useDispatch();
+    let navigate = useNavigate();
+    const [anchorElNav, setAnchorElNav] = React.useState(null);
+    const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+    const handleOpenNavMenu = (event) => {
+        setAnchorElNav(event.currentTarget);
+    };
+    const handleOpenUserMenu = (event) => {
+        setAnchorElUser(event.currentTarget);
+    };
+
+    const handleCloseNavMenu = () => {
+        setAnchorElNav(null);
+    };
+
+    const handleCloseUserMenu = () => {
+        setAnchorElUser(null);
+    };
+    const logout = (e) => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("userInfo");
+        window.location.reload();
+        navigate("/");
+    }
 
     return (
         <NavbarContainer>
             <Wrapper>
                 <Left>
                     <Link style={{ textDecoration: 'none' }} to="/">
-                        <LogoImg src='https://i.ibb.co/WgrvDHc/logo-white.png' />
+                        <LogoImg src='https://i.ibb.co/rcGdSJP/Component-1-1.png' />
                     </Link>
                 </Left>
                 <Right>
@@ -89,14 +127,34 @@ const Navbar = () => {
                     <Link style={{ textDecoration: 'none' }} to="/categories">
                         <MenuItm>ABOUT US</MenuItm>
                     </Link>
-                    <ToolWrapper>
-                        <IconButton>
-                            <AccountCircleIcon sx={{ color: "white" }} />
-                        </IconButton>
-                        <Link style={{ textDecoration: 'none' }} to="/login">
-                            <Login>LOGIN</Login>
-                        </Link>
-                    </ToolWrapper>
+                    {!token ?
+                        <ToolWrapper>
+                            <IconButton>
+                                <AccountCircleIcon sx={{ color: "white" }} />
+                            </IconButton>
+                            <Link style={{ textDecoration: 'none' }} to="/login">
+                                <Login>LOGIN</Login>
+                            </Link>
+                        </ToolWrapper>
+                        :
+                        <ToolWrapper >
+
+                            <IconButton>
+                                <AccountCircleIcon sx={{ color: "white" }} />
+                            </IconButton>
+                            <Link style={{ textDecoration: 'none' }}>
+                                <Login>{(userInfoDetails.fullName.split(' '))[0]}</Login>
+                            </Link>
+                            <Tooltip title="Log out">
+                                <IconButton style={{marginLeft:'30px'}} onClick={() => { logout() }}>
+                                    <LogoutIcon sx={{ color: "white" }} />
+                                </IconButton>
+
+
+                            </Tooltip>
+                        </ToolWrapper>
+                    }
+
                 </Right>
             </Wrapper>
         </NavbarContainer>

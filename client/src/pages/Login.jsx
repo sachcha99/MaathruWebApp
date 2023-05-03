@@ -6,12 +6,17 @@ import KeyIcon from '@mui/icons-material/Key';
 import React, { useState } from "react";
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import jwt_decode from 'jwt-decode'
 // import API from './../api'
 // import { useSelector, useDispatch } from 'react-redux';
 // import { login, userInfo } from '../redux/user';
 // import jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import api from "../api";
+import { useSelector, useDispatch } from 'react-redux';
+import { login, userInfo } from '../redux/user';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -47,8 +52,8 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.h1`
-  font-size: 24px;
-  font-weight: 300;
+  font-size: 26px;
+  font-weight: 700;
 `;
 
 const Form = styled.form`
@@ -74,22 +79,25 @@ const Agreement = styled.div`
 
 const LogInSpan = styled.span`
   margin-left: 5px;
-  color: #7d9eff;
+  color: #956C6E;
 `;
 
 const LogInDiv = styled.div`
   width: 500px
   font-size: 12px;
   display: flex;
-  justify-content: center
+  justify-content: center;
+  padding-top: 20px;
 `;
 
 const Button = styled.button`
   width: 500px;
   border: none;
   padding: 15px 20px;
-  background-color: white;
-  color:#2148C0;
+  background-color: #956C6E;
+  color:#FEECED;
+  font-size: 17px;
+  font-weight:600;
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -145,13 +153,14 @@ const SocialImg = styled.img`
 
 
 const Login = () => {
-  const [userDetails, setUserDetails] = useState({ username: "", password: "" })
+  const [userDetails, setUserDetails] = useState({ email: "", password: "" })
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarType, setSnackbarType] = useState("");
   const [snackbarMsg, setSnackbarMsg] = useState("");
-//   const user = useSelector((state) => state.user)
-//   const dispatch = useDispatch();
+  //   const user = useSelector((state) => state.user)
+  //   const dispatch = useDispatch();
   let navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleOpenSnackbar = () => {
     setOpenSnackbar(true);
@@ -165,131 +174,134 @@ const Login = () => {
     setOpenSnackbar(false);
   };
 
-//   const handleSubmit = async (event) => {
-//     event.preventDefault();
+  const isValidEmail = (email) => {
+    return /\S+@\S+\.\S+/.test(email);
+  }
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-//     if (userDetails.password !== "" && userDetails.username !== "") {
+    if (userDetails.password !== "" && userDetails.username !== "") {
 
-//       console.log("userDetails::", userDetails)
-//       try {
-//         const result = await API.post('user/validate', userDetails)
-//         console.log("result", result)
-//         setSnackbarType("success")
-//         setSnackbarMsg("Logged In Successfully")
-//         handleOpenSnackbar()
-//         let decodedToken = jwt_decode(result.data.token)
-//         localStorage.setItem('token', result.data.token)
-//         localStorage.setItem('userInfo', JSON.stringify(result.data.userDetails))
-//         dispatch(login({ 'fullName': decodedToken.fullName, 'username': decodedToken.username }))
-//         dispatch(userInfo(result.data.userDetails))
-//         if (result.data.userDetails.userType === "buyer") {
-//           navigate('/')
-//         }
-//         if (result.data.userDetails.userType === "seller") {
-//           navigate('/sellerDashboard')
-//         }
-//         if (result.data.userDetails.userType === "admin") {
-//           navigate('/adminDashboard')
-//         }
+      if (!isValidEmail(userDetails.email)) {
+        setSnackbarType("error")
+        setSnackbarMsg("Please enter a valid email")
+        handleOpenSnackbar()
+      } else {
+        try {
+          const result = await api.post('user/validate', userDetails)
+          console.log("result", result)
+          setSnackbarType("success")
+          setSnackbarMsg("Logged In Successfully")
+          handleOpenSnackbar()
+          let decodedToken = jwt_decode(result.data.token)
+          localStorage.setItem('token', result.data.token)
+          localStorage.setItem('userInfo', JSON.stringify(result.data.userDetails))
+          dispatch(login({ 'fullName': decodedToken.fullName, 'email': decodedToken.email }))
+          dispatch(userInfo(result.data.userDetails))
+          // if (result.data.userDetails.userType === "buyer") {
+          navigate('/')
+          // }
+          // if (result.data.userDetails.userType === "seller") {
+          //   navigate('/sellerDashboard')
+          // }
 
-//       } catch (error) {
-//         console.log("error", error)
-//         setSnackbarType("error")
-//         setSnackbarMsg(error.response.data)
-//         handleOpenSnackbar()
-//       }
+        } catch (error) {
+          console.log("error", error)
+          setSnackbarType("error")
+          setSnackbarMsg(error.response.data)
+          handleOpenSnackbar()
+        }
+      }
 
-//     }
-//     else {
-//       setSnackbarType("error")
-//       setSnackbarMsg("Please fill all the fields")
-//       handleOpenSnackbar()
-//     }
+    }
+    else {
+      setSnackbarType("error")
+      setSnackbarMsg("Please fill all the fields")
+      handleOpenSnackbar()
+    }
 
-//   };
+  };
 
-    return (
-        <MainContainer>
-            <Navbar/>
-            <Container>
-                <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
-                    <Alert onClose={handleCloseSnackbar} severity={snackbarType} sx={{ width: '100%' }}>
-                        {snackbarMsg}
-                    </Alert>
-                </Snackbar>
-                <Wrapper>
-                    <Title>Log In</Title>
-                    <TextField
-                        label="Username"
-                        id="username"
-                        value={userDetails.username}
-                        onChange={(e) => { setUserDetails({ ...userDetails, username: e.target.value }) }}
-                        autoComplete='off'
-                        sx={{
-                            "& .MuiInputBase-root": {
-                                width: 500
-                            },
-                            input: { color: 'white', marginLeft: '8px' },
-                            m: 1, fieldset: { borderColor: "white" },
-                            "& .MuiOutlinedInput-root.Mui-focused": {
-                                "& > fieldset": {
-                                    borderColor: "white"
-                                }
-                            }
-                        }}
-                        InputLabelProps={{
-                            style: { color: '#fff' },
-                        }}
-                        InputProps={{
-                            sx: {
-                                width: '100%'
-                            },
-                            startAdornment: <AccountCircleIcon style={{ color: 'white' }} />,
-                        }}
-                    />
-                    <TextField
-                        type='password'
-                        value={userDetails.password}
-                        onChange={(e) => { setUserDetails({ ...userDetails, password: e.target.value }) }}
-                        label="Password"
-                        id="password"
-                        sx={{
-                            "& .MuiInputBase-root": {
-                                width: 500
-                            },
-                            input: { color: 'white', marginLeft: '8px' },
-                            m: 1, fieldset: { borderColor: "white" },
-                            "& .MuiOutlinedInput-root.Mui-focused": {
-                                "& > fieldset": {
-                                    borderColor: "white"
-                                }
-                            }
-                        }}
-                        InputLabelProps={{
-                            style: { color: '#fff' },
-                        }}
-                        InputProps={{
-                            sx: {
-                                width: '100%'
-                            },
-                            startAdornment: <KeyIcon style={{ color: 'white' }} />,
-                        }}
-                    />
-                    <ButtonContainer>
-                        {/* <Button onClick={(e) => { handleSubmit(e) }}>LOG IN</Button> */}
-                        <Button>LOG IN</Button>
+  return (
+    <MainContainer>
+      <Navbar />
+      <Container>
+        <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
+          <Alert onClose={handleCloseSnackbar} severity={snackbarType} sx={{ width: '100%' }}>
+            {snackbarMsg}
+          </Alert>
+        </Snackbar>
+        <Wrapper>
+          <Title>LOG IN</Title>
+          <TextField
+            label="E-mail"
+            onChange={(e) => { setUserDetails({ ...userDetails, email: e.target.value }) }}
+            value={userDetails.email}
+            type='email'
+            id="email"
+            autoComplete='off'
+            sx={{
+              "& .MuiInputBase-root": {
+                width: 500
+              },
+              input: { color: 'black', marginLeft: '8px' },
+              m: 1, fieldset: { borderColor: "black" },
+              "& .MuiOutlinedInput-root.Mui-focused": {
+                "& > fieldset": {
+                  borderColor: "black"
+                }
+              }
+            }}
+            InputLabelProps={{
+              style: { color: '#000' },
+            }}
+            InputProps={{
+              sx: {
+                width: '100%'
+              },
+              startAdornment: <MailOutlineIcon style={{ color: 'black' }} />,
+            }}
+          />
+          <TextField
+            type='password'
+            value={userDetails.password}
+            onChange={(e) => { setUserDetails({ ...userDetails, password: e.target.value }) }}
+            label="Password"
+            id="password"
+            sx={{
+              "& .MuiInputBase-root": {
+                width: 500
+              },
+              input: { color: 'black', marginLeft: '8px' },
+              m: 1, fieldset: { borderColor: "black" },
+              "& .MuiOutlinedInput-root.Mui-focused": {
+                "& > fieldset": {
+                  borderColor: "black"
+                }
+              }
+            }}
+            InputLabelProps={{
+              style: { color: '#000' },
+            }}
+            InputProps={{
+              sx: {
+                width: '100%'
+              },
+              startAdornment: <KeyIcon style={{ color: 'black' }} />,
+            }}
+          />
+          <ButtonContainer>
+            <Button onClick={(e) => { handleSubmit(e) }}>LOG IN</Button>
 
-                    </ButtonContainer>
-                    <OrImg src="https://i.ibb.co/cvHVtyC/Or.png" />
-                    <SocialImg src="https://i.ibb.co/dQ2HfbG/Social-Icons.png" />
-                    <LogInDiv>
-                        Don’t have an account?
-                        <Link style={{ textDecoration: 'none' }} to="/register"> <LogInSpan> Sign Up</LogInSpan></Link>
-                    </LogInDiv>
-                </Wrapper>
-            </Container>
-        </MainContainer>
-    );
+          </ButtonContainer>
+          <LogInDiv>
+            Don’t have an account?
+            <Link style={{ textDecoration: 'none' }} to="/registerType"> <LogInSpan> Sign Up</LogInSpan></Link>
+          </LogInDiv>
+        </Wrapper>
+      </Container>
+    </MainContainer>
+  );
 };
 
 export default Login;

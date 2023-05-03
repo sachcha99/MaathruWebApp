@@ -2,14 +2,17 @@ import { ArrowLeftOutlined, ArrowRightOutlined } from "@mui/icons-material";
 import { useState } from "react";
 import styled from "styled-components";
 import { sliderItems } from "../data";
-import { Button } from "@mui/material";
+import { mobile } from "../responsive";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   width: 100%;
-  height: 60vh;
+  height: 100vh;
   display: flex;
   position: relative;
   overflow: hidden;
+  // margin-top: 30px;
+  ${mobile({ display: "none" })}
 `;
 
 const Arrow = styled.div`
@@ -40,7 +43,7 @@ const Wrapper = styled.div`
 
 const Slide = styled.div`
   width: 100vw;
-  height: 60vh;
+  height: 100vh;
   display: flex;
   align-items: center;
   background-color: #${(props) => props.bg};
@@ -52,7 +55,8 @@ const ImgContainer = styled.div`
 `;
 
 const Image = styled.img`
-  height: 80%;
+  height: 100%;
+  padding-left:100px;
 `;
 
 const InfoContainer = styled.div`
@@ -61,8 +65,7 @@ const InfoContainer = styled.div`
 `;
 
 const Title = styled.h1`
-  font-size: 40px;
-  color: #964B00
+  font-size: 50px;
 `;
 
 const Desc = styled.p`
@@ -72,41 +75,66 @@ const Desc = styled.p`
   letter-spacing: 3px;
 `;
 
+const Button1 = styled.button`
+  padding: 10px;
+  margin-right: 20px;
+  font-size: 20px;
+  background-color: transparent;
+  cursor: pointer;
+  border: 2px solid #956C6E;
+  border-radius: 6px;
+  color: #956C6E;
+`;
+
+const Button2 = styled.button`
+  padding: 10px;
+  margin-right: 20px;
+  font-size: 20px;
+  background-color: #956C6E;
+  cursor: pointer;
+  border: 2px solid #956C6E;
+  border-radius: 6px;
+  color: #fff;
+`;
 
 const Slider = () => {
-    const [slideIndex, setSlideIndex] = useState(0);
-    const handleClick = (direction) => {
-        if (direction === "left") {
-            setSlideIndex(slideIndex > 0 ? slideIndex - 1 : 2);
-        } else {
-            setSlideIndex(slideIndex < 2 ? slideIndex + 1 : 0);
-        }
-    };
+  const [slideIndex, setSlideIndex] = useState(0);
+  const token = localStorage.getItem("token") || null;
+  let navigate = useNavigate();
 
-    return (
-        <Container>
-            {/* <Arrow direction="left" onClick={() => handleClick("left")}>
+  const handleClick = (direction) => {
+    if (direction === "left") {
+      setSlideIndex(slideIndex > 0 ? slideIndex - 1 : 2);
+    } else {
+      setSlideIndex(slideIndex < 2 ? slideIndex + 1 : 0);
+    }
+  };
+
+  return (
+    <Container>
+      {/* <Arrow direction="left" onClick={() => handleClick("left")}>
         <ArrowLeftOutlined />
       </Arrow> */}
-            <Wrapper slideIndex={slideIndex}>
-                {sliderItems.map((item) => (
-                    <Slide bg={item.bg} key={item.id}>
-                        <ImgContainer>
-                            <Image src={item.img} />
-                        </ImgContainer>
-                        <InfoContainer>
-                            <Title>{item.title}</Title>
-                            <Button variant="outlined">Start Journey</Button>
-                            <Button sx={{marginLeft: 3}} variant="outlined">Sign in</Button>
-                        </InfoContainer>
-                    </Slide>
-                ))}
-            </Wrapper>
-            {/* <Arrow direction="right" onClick={() => handleClick("right")}>
+      <Wrapper slideIndex={slideIndex}>
+        {sliderItems.map((item) => (
+          <Slide bg={item.bg} key={item.id}>
+            <ImgContainer>
+              <Image src={item.img} />
+            </ImgContainer>
+            <InfoContainer>
+              <Title>{item.title}</Title>
+              <Desc>{item.desc}</Desc>
+              <Button2>START JOURNEY</Button2>
+              {!token && <Button1 onClick={()=>{navigate('/login')}}>SIGN IN</Button1>}
+            </InfoContainer>
+          </Slide>
+        ))}
+      </Wrapper>
+      {/* <Arrow direction="right" onClick={() => handleClick("right")}>
         <ArrowRightOutlined />
       </Arrow> */}
-        </Container>
-    );
+    </Container>
+  );
 };
 
 export default Slider;

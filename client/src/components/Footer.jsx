@@ -22,7 +22,7 @@ import {
   `;
   
   const Logo = styled.img`
-    width: 100px;
+    width: 70px;
   `;
   
   const Desc = styled.p`
@@ -94,7 +94,7 @@ import {
     return (
         <Container>
             <Left>
-                <Logo src='https://i.ibb.co/H2tcszD/logo.png' />
+                <Logo src='https://i.ibb.co/rcGdSJP/Component-1-1.png' />
                 <Desc>
                     There are many variations of passages of Lorem Ipsum available, but
                     the majority have suffered alteration in some form, by injected
@@ -116,18 +116,20 @@ import {
                 </SocialContainer>
             </Left>
             <Center>
-                <Title>Useful Links</Title>
+                <Title>Services</Title>
                 <List>
-                    <ListItem>Home</ListItem>
-                    <ListItem>Cart</ListItem>
-                    <ListItem>Man Fashion</ListItem>
-                    <ListItem>Woman Fashion</ListItem>
-                    <ListItem>Accessories</ListItem>
-                    <ListItem>My Account</ListItem>
-                    <ListItem>Order Tracking</ListItem>
-                    <ListItem>Wishlist</ListItem>
-                    <ListItem>Wishlist</ListItem>
-                    <ListItem>Terms</ListItem>
+                    <ListItem>Pregnancy Tips</ListItem>
+                    <ListItem>About Us</ListItem>
+
+                    <ListItem>Meal Plans</ListItem>
+                    <ListItem>Contact Us</ListItem>
+
+                    <ListItem>Yoga & Exercises</ListItem>
+                    <ListItem>Privacy Policy</ListItem>
+
+                    <ListItem>Instructors</ListItem>
+                    <ListItem>Return Policy</ListItem>
+
                 </List>
             </Center>
             <Right>
@@ -147,7 +149,7 @@ import {
                 <ContactItem>
                     <MailOutline style={{ marginRight: "10px", color: 'white' }} />
                     <SupportText>
-                        info@shiftclothing.com
+                        info@maathru.com
                     </SupportText>
                 </ContactItem>
                 <Payment src="https://i.ibb.co/Qfvn4z6/payment.png" />

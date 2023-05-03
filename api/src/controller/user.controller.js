@@ -14,11 +14,6 @@ const createUser = async (req, res) => {
                 console.log(err);
             } else {
                 if (!result) {
-                    await User.findOne({ username: username }, async (err, result) => {
-                        if (err) {
-                            console.log(err);
-                        } else {
-                            if (!result) {
             
                                 bcrypt.genSalt(saltRounds, function (err, salt) {
                                     bcrypt.hash(req.body.password, salt, async function (err, hash) {
@@ -37,12 +32,6 @@ const createUser = async (req, res) => {
                                     });
                                 });
             
-                            } else {
-                                console.log("Username Already Taken");
-                                res.status(500).send({ message: "Username Already Taken" });
-                            }
-                        }
-                    });
 
                 } else {
                     console.log("User Already Exist");
@@ -56,7 +45,7 @@ const createUser = async (req, res) => {
 //login Validate
 const validateUser = async (req, res) => {
     console.log(req);
-    await User.findOne({ username: req.body.username }, (err, user) => {
+    await User.findOne({ email: req.body.email }, (err, user) => {
         if (err) {
             console.log(err);
             res.status(500).send(err);
@@ -69,7 +58,7 @@ const validateUser = async (req, res) => {
                     console.log(user);
                     const token = jwt.sign({
                         fullName: user.fullName,
-                        username: user.username,
+                        email: user.email,
                     }, process.env.JWT_SECRET)
 
                     res.send({ token: token ,userDetails:user});

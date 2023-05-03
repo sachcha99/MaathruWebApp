@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar'
 import styled from "styled-components";
 import Slider from '../components/Slider';
 import CardView from '../components/CardView';
+import Journey from '../components/Journey';
 
 const Container = styled.div`
   width: 100vw;
@@ -18,6 +19,7 @@ const Home = () => {
         <Navbar />
         <Slider/>
         <CardView/>
+        <Journey/>
         <Footer />
       </Container>
 

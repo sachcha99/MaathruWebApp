@@ -1,7 +1,7 @@
 export const sliderItems = [
     {
       id: 1,
-      img: "https://i.ibb.co/cXFnLLV/3.png",
+      img: "https://i.ibb.co/xhN7Pjt/image341.png",
       title: "START YOUR PREGNANCY JOURNEY WITH US",
       bg: "FFB6C1",
     },
