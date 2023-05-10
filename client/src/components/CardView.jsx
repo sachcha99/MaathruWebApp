@@ -73,7 +73,7 @@ padding:30px 0;
 `;
 
     const Image = styled.img`
-padding-top:25px;
+    padding-top:25px;
   height: 140px;
 `;
     let navigate = useNavigate();
@@ -92,7 +92,7 @@ padding-top:25px;
                     </Card>
                 </CardBox>
                 <CardBox>
-                <Card onClick={() => { navigate('/mealPlans') }}>
+                    <Card onClick={() => { navigate('/mealPlans') }}>
                         <ImgContainer  >
                             <Image src="https://i.ibb.co/sqBhdjm/Mask-Group-2.png" />
                         </ImgContainer>
@@ -108,7 +108,7 @@ padding-top:25px;
                     </Card>
                 </CardBox>
                 <CardBox>
-                    <Card>
+                    <Card onClick={() => { navigate('/channelDoc') }}>
                         <ImgContainer>
                             <Image src="https://i.ibb.co/Dtkp3mz/Mask-Group-4.png" />
                         </ImgContainer>
@@ -124,7 +124,7 @@ padding-top:25px;
                     </Card>
                 </CardBox>
                 <CardBox>
-                    <Card>
+                <Card onClick={() => { navigate('/reading') }}>
                         <ImgContainer>
                             <Image src="https://i.ibb.co/XVDv8QP/Mask-Group-6.png" />
                         </ImgContainer>
