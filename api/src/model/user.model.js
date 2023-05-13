@@ -10,6 +10,7 @@ const UserSchema = new mongoose.Schema({
     mobileNo: {type: String, required: true},
     pregnancyDate: {type: Date},
     isVerified: { type: String },
+    description: {type: String},
     portfolio: {type: String}
 },{
     timestamps:true

@@ -263,15 +263,14 @@ const RegisterInstructor = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setDisable(true);
-    let formData = new FormData();
-    formData.append("file", selectedFile);
-    formData.append("fileName", selectedFile.name);
     try {
-      const videoResult = await api.post("video/create", formData);
-      setUserDetails({
-        ...userDetails,
-        portfolio: videoResult.data.publicLink,
-      });
+        let videoResult = null
+        if(selectedFile){
+            let formData = new FormData();
+            formData.append("file", selectedFile);
+            formData.append("fileName", selectedFile.name);
+            videoResult = await api.post("video/create", formData);
+        }
       if (
         userDetails.fullName !== "" &&
         userDetails.email !== "" &&
@@ -289,7 +288,7 @@ const RegisterInstructor = () => {
           } else {
             try {
               console.log("userDetails", userDetails);
-              const result = await api.post("user/create", userDetails);
+              const result = await api.post("user/create", {...userDetails, portfolio: videoResult ? videoResult.data.publicLink: ''});
               console.log("result", result);
               setUserDetails({
                 fullName: "",
