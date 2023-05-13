@@ -1,3 +1,4 @@
+import { useRef } from 'react'
 import styled from "styled-components";
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
@@ -14,13 +15,18 @@ import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import CallIcon from '@mui/icons-material/Call';
 import HomeIcon from '@mui/icons-material/Home';
+import AddIcon from '@mui/icons-material/Add';
+import CloseIcon from '@mui/icons-material/Close'; 
 import Navbar from "../components/Navbar";
+import ReactPlayer from 'react-player'
+
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import api from "../api";
+import { Box, IconButton, Typography } from "@mui/material";
 
 // import API from './../api'
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -29,14 +35,14 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 const MainContainer = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: 140vh;
   background-color: #ffe6e6;
   background-size: cover;
 `;
 
 const Container = styled.div`
   width: 100vw;
-  height: 120vh;
+  height: 150vh;
   background-color: #ffe6e6;
   background-size: cover;
   display: flex;
@@ -162,11 +168,60 @@ const FlexBox = styled.div`
   width: '40%';
 `;
 
+const FileWrapper = styled.div`
+    width: 500px;  
+    border: 1.5px solid black;
+    border-radius: 1px; 
+    height: 30vh;
+    margin-top:8px;
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    justify-content: center
+`;
+
+const FileToolBox = styled.div`
+    width: 200px;  
+    border: 1px dotted black;
+    border-radius: 1px; 
+    height: 120px;
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    justify-content: center
+`;
+
+const UploadButton = styled.button`
+  width: 100px;
+  border: none;
+  padding: 15px 20px;
+  background-color: #956C6E;
+  color:#FEECED;
+  font-size: 17px;
+  font-weight:600;
+  cursor: pointer;
+`;
+
+const ClearButton = styled.button`
+  width: 100px;
+  border: none;
+  padding: 15px 20px;
+  background-color: red;
+  color:#FEECED;
+  font-size: 17px;
+  font-weight:600;
+  cursor: pointer;
+`;
+
 const RegisterInstructor = () => {
+    const fileInputRef = useRef(null);
     const [userDetails, setUserDetails] = useState({ fullName: "", email: "", address: "", userType: "instructor", password: "", confirmPassword: "", mobileNo: "", description: "", portfolio: "" })
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const [snackbarType, setSnackbarType] = useState("");
     const [snackbarMsg, setSnackbarMsg] = useState("");
+    const [selectedFile, setSelectedFile] = useState(null);
+    const [preview, setPreview] = useState(null)
+    const [disable, setDisable] = useState(false)
 
     const handleOpenSnackbar = () => {
         setOpenSnackbar(true);
@@ -184,42 +239,73 @@ const RegisterInstructor = () => {
         return /\S+@\S+\.\S+/.test(email);
     }
 
+    const handleFileChange = (event) => {
+        if (fileInputRef.current && fileInputRef.current.files) {
+            setSelectedFile(fileInputRef.current.files[0])
+            setPreview(URL.createObjectURL(fileInputRef.current.files[0]))
+        }
+    };
+
+    const handleClear = () => {
+        setPreview(null)
+        setSelectedFile(null)
+    }
+
     const handleSubmit = async (event) => {
         event.preventDefault();
-        if (userDetails.fullName !== "" && userDetails.email !== "" && userDetails.password !== "" && userDetails.confirmPassword !== "" && userDetails.description !== "" && userDetails.address !== "" && userDetails.mobileNo !== "" ) {
-            if (userDetails.password === userDetails.confirmPassword) {
-                if (!isValidEmail(userDetails.email)) {
-                    setSnackbarType("error")
-                    setSnackbarMsg("Please enter a valid email")
-                    handleOpenSnackbar()
-                } else {
-                    try {
-                        const result = await api.post('user/create', userDetails)
-                        console.log("result", result)
-                        setUserDetails({ fullName: "", email: "", userType: "instructor", password: "", confirmPassword: "", address: "", mobileNo: "", description: "", portfolio: "" })
-                        setSnackbarType("success")
-                        setSnackbarMsg("User Created Successfully")
-                        handleOpenSnackbar()
-                    } catch (error) {
+        setDisable(true)
+        let formData = new FormData();
+        formData.append('file', selectedFile)
+        formData.append('fileName', selectedFile.name)
+        try {
+            const videoResult = await api.post('video/create', formData)
+            setUserDetails({ ...userDetails, portfolio: videoResult.data.publicLink })
+            if (userDetails.fullName !== "" && userDetails.email !== "" && userDetails.password !== "" && userDetails.confirmPassword !== "" && userDetails.description !== "" && userDetails.address !== "" && userDetails.mobileNo !== "" ) {
+                if (userDetails.password === userDetails.confirmPassword) {
+                    if (!isValidEmail(userDetails.email)) {
                         setSnackbarType("error")
-                        setSnackbarMsg(error.response.data.message)
+                        setSnackbarMsg("Please enter a valid email")
                         handleOpenSnackbar()
+                    } else {
+                        try {
+                            console.log('userDetails', userDetails)
+                            const result = await api.post('user/create', userDetails)
+                            console.log("result", result)
+                            setUserDetails({ fullName: "", email: "", userType: "instructor", password: "", confirmPassword: "", address: "", mobileNo: "", description: "", portfolio: "" })
+                            setSelectedFile(null)
+                            setPreview(null)
+                            setSnackbarType("success")
+                            setSnackbarMsg("User Created Successfully")
+                            setDisable(false)
+                            handleOpenSnackbar()
+                        } catch (error) {
+                            setDisable(false)
+                            setSnackbarType("error")
+                            setSnackbarMsg(error.response.data.message)
+                            handleOpenSnackbar()
+                        }
                     }
+    
+    
+                } else {
+                    setDisable(false)
+                    setSnackbarType("error")
+                    setSnackbarMsg("Passwords are not matched")
+                    handleOpenSnackbar()
                 }
-
-
-            } else {
+            }
+            else {
+                setDisable(false)
                 setSnackbarType("error")
-                setSnackbarMsg("Passwords are not matched")
+                setSnackbarMsg("Please fill all the fields")
                 handleOpenSnackbar()
             }
-        }
-        else {
+        } catch (error) {
+            setDisable(false)
             setSnackbarType("error")
-            setSnackbarMsg("Please fill all the fields")
+            setSnackbarMsg("File upload fail")
             handleOpenSnackbar()
         }
-
     };
 
 
@@ -450,10 +536,32 @@ const RegisterInstructor = () => {
                             },
                         }}
                     />
+                    {preview ?
+                        <Box sx={{ position: 'relative', marginTop:'8px'}}>
+                            <ReactPlayer height={"300px"} width={"500px"} url={preview} controls={true} />
+                            <IconButton sx={{ position: 'absolute', top: 5, right: 0, color: 'red' }} aria-label="upload">
+                                <CloseIcon onClick={handleClear} />
+                            </IconButton>
+                        </Box>
+                        :
+                        <FileWrapper onClick={() => fileInputRef.current?.click()}>
+                            <Input style={{ display: 'none' }} type="file" ref={fileInputRef} onChange={handleFileChange} />
+                            <IconButton aria-label="upload">
+                                <AddIcon />
+                            </IconButton>
+                            <Typography>Add a Photo or Video</Typography>
+                        </FileWrapper>
+                    }
+                    {/* {preview &&
+                        <FileToolBox>
+                            <UploadButton onClick={handleUpload}>Upload</UploadButton>
+                            <ClearButton onClick={handleClear}>Clear</ClearButton>
+                        </FileToolBox>
+                    } */}
 
                     <ButtonContainer >
                         {/* <Button onClick={(e) => handleSubmit(e)}>SIGN UP</Button> */}
-                        <Button onClick={(e) => handleSubmit(e)}>Register</Button>
+                        <Button disabled={disable} onClick={(e) => handleSubmit(e)}>Register</Button>
                     </ButtonContainer>
                     <SignUpDiv>
                         Already have an account

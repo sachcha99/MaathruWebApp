@@ -10,6 +10,7 @@ const UserSchema = new mongoose.Schema({
     address: {type: String, required: true},
     mobileNo: {type: String, required: true},
     pregnancyDate: {type: Date},
+    portfolio: {type: String}
 },{
     timestamps:true
 });
