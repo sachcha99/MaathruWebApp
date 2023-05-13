@@ -65,6 +65,30 @@ const ApproveButton = styled.button`
   }
 `;
 
+const StatusButton = styled.button`
+  padding: 15px;
+  border: 2px solid white;
+  background-color: #e9e9e9;
+  cursor: pointer;
+  font-weight: 700;
+  color: black;
+  border-radius: 8px;
+  transition: 0.8s;
+
+  &:hover {
+    opacity: 1;
+    background-color: #aaaaaa;
+  }
+`;
+
+const Dot = styled.span`
+  height: 10px;
+  width: 10px;
+  margin-left: 15px;
+  border-radius: 50%;
+  display: inline-block;
+`;
+
 const Dashboard = () => {
   const [data, setData] = useState(null);
 
@@ -78,8 +102,14 @@ const Dashboard = () => {
     fetchData();
   }, []);
 
-  const handleOnPress = (id, type) => {
+  const handleOnPress = async (id, type) => {
     console.log("call", id, type);
+    const result = await api.put(`user/update/${id}`, {
+      isVerified: type,
+      _id: id,
+    });
+    console.log(result);
+    fetchData();
   };
 
   return (
@@ -207,30 +237,48 @@ const Dashboard = () => {
                         }}
                       >
                         Download documents
-                        <IconButton aria-label="delete" size="large" >
-                          <DownloadForOfflineRoundedIcon fontSize="inherit" color="#407ebd"/>
+                        <IconButton aria-label="delete" size="large">
+                          <DownloadForOfflineRoundedIcon
+                            fontSize="inherit"
+                            color="#407ebd"
+                          />
                         </IconButton>
                       </Box>
-                      <Box
-                        sx={{
-                          display: "flex",
-                          flexDirection: "row",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          gap: 1,
-                        }}
-                      >
-                        <ApproveButton
-                          onClick={() => handleOnPress(user?.id, "accept")}
+                      {!user.isVerified === 'approved'|| 'Rejected'? (
+                        <Box
+                          sx={{
+                            display: "flex",
+                            flexDirection: "row",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            gap: 1,
+                          }}
                         >
-                          Accept
-                        </ApproveButton>
-                        <RejectButton
-                          onClick={() => handleOnPress(user?.id, "reject")}
-                        >
-                          Reject
-                        </RejectButton>
-                      </Box>
+                          <ApproveButton
+                            onClick={() => handleOnPress(user?._id, "approved")}
+                          >
+                            Approve
+                          </ApproveButton>
+                          <RejectButton
+                            onClick={() => handleOnPress(user?._id, "Rejected")}
+                          >
+                            Reject
+                          </RejectButton>
+                        </Box>
+                      ) : (
+                        <StatusButton>
+                          {user.isVerified === "approved"
+                            ? "Approved"
+                            : "Rejected"}
+                          <Dot
+                            style={
+                              user.isVerified === "approved"
+                                ? { backgroundColor: "green" }
+                                : { backgroundColor: "red" }
+                            }
+                          />
+                        </StatusButton>
+                      )}
                     </Box>
                   </Box>
                 ))

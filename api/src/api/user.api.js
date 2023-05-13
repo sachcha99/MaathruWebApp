@@ -10,5 +10,6 @@ module.exports = function (){
     router.post('/validate', UserController.validateUser);
     router.post('/delete',UserController.deleteUser);
     router.get('/type/:ss', UserController.getAllInstructors);
+    router.put('/update/:id', UserController.updateUserById);
     return router;
 }

@@ -149,15 +149,34 @@ const getUserById = async (req, res) => {
 
 //get all instructors
 const getAllInstructors = async (req, res) => {
-    try {
-        const result = await User.find({'userType': 'instructor'});
-        res.send(result);
-        console.log(result);
-    } catch (err) {
-        console.log(err);
-        res.status(500).send('Server error');
-    }
-}
+  try {
+    const result = await User.find({ userType: "instructor" });
+    res.send(result);
+    console.log(result);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Server error");
+  }
+};
+
+const updateUserById = async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const result = await User.updateOne(
+      { _id: id },
+      {
+        $set: {
+          isVerified: req.body.isVerified,
+        },
+      }
+    );
+    res.send(result);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Server error");
+  }
+};
 
 //delete User
 const deleteUser = async (req, res) => {
@@ -178,4 +197,5 @@ module.exports = {
   getUserById,
   validateUser,
   getAllInstructors,
+  updateUserById,
 };

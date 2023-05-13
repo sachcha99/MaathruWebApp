@@ -1,36 +1,36 @@
-import { useRef } from 'react'
+import { useRef } from "react";
 import styled from "styled-components";
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
 import { Link } from "react-router-dom";
-import TextField from '@mui/material/TextField';
-import BadgeIcon from '@mui/icons-material/Badge';
-import MailOutlineIcon from '@mui/icons-material/MailOutline';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import KeyIcon from '@mui/icons-material/Key';
+import TextField from "@mui/material/TextField";
+import BadgeIcon from "@mui/icons-material/Badge";
+import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import KeyIcon from "@mui/icons-material/Key";
 import React, { useState } from "react";
-import Snackbar from '@mui/material/Snackbar';
-import MuiAlert from '@mui/material/Alert';
-import CallIcon from '@mui/icons-material/Call';
-import HomeIcon from '@mui/icons-material/Home';
-import AddIcon from '@mui/icons-material/Add';
-import CloseIcon from '@mui/icons-material/Close'; 
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+import CallIcon from "@mui/icons-material/Call";
+import HomeIcon from "@mui/icons-material/Home";
+import AddIcon from "@mui/icons-material/Add";
+import CloseIcon from "@mui/icons-material/Close";
 import Navbar from "../components/Navbar";
-import ReactPlayer from 'react-player'
+import ReactPlayer from "react-player";
 
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import dayjs from 'dayjs';
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import dayjs from "dayjs";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import api from "../api";
 import { Box, IconButton, Typography } from "@mui/material";
 
 // import API from './../api'
 const Alert = React.forwardRef(function Alert(props, ref) {
-    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
 const MainContainer = styled.div`
@@ -53,8 +53,8 @@ const Container = styled.div`
 const Wrapper = styled.div`
   width: 600px;
   padding: 20px;
-  background: rgb(0,0,0);
-  background: #FFB6C1;
+  background: rgb(0, 0, 0);
+  background: #ffb6c1;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -85,12 +85,12 @@ const Input = styled.input`
 const Agreement = styled.div`
   font-size: 12px;
   margin: 20px 0px;
-  width: 500px
+  width: 500px;
 `;
 
 const SignUpSpan = styled.span`
   margin-left: 5px;
-  color: #956C6E;
+  color: #956c6e;
 `;
 
 const SignUpDiv = styled.div`
@@ -105,10 +105,10 @@ const Button = styled.button`
   width: 500px;
   border: none;
   padding: 15px 20px;
-  background-color: #956C6E;
-  color:#FEECED;
+  background-color: #956c6e;
+  color: #feeced;
   font-size: 17px;
-  font-weight:600;
+  font-weight: 600;
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -121,23 +121,23 @@ const ButtonContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top:10px;
+  margin-top: 10px;
 `;
 
 const RadioButtonContainer = styled.div`
   flex: 1;
   min-width: 80%;
   margin: 10px 10px 0px 10px;
-  padding: 6px 10px 6px 10px;  
-  
+  padding: 6px 10px 6px 10px;
+
   border: 1.5px solid #fff;
-  border-radius: 3px; 
+  border-radius: 3px;
   display: flex;
 `;
 
 const RadioInput = styled.div`
   display: flex;
-  margin: 0 10px
+  margin: 0 10px;
 `;
 
 const LogoImg = styled.img`
@@ -157,7 +157,6 @@ const OrImg = styled.img`
   margin: 15px 0;
 `;
 
-
 const SocialImg = styled.img`
   width: 200px;
   margin: 15px 0;
@@ -165,40 +164,40 @@ const SocialImg = styled.img`
 
 const FlexBox = styled.div`
   display: flex;
-  width: '40%';
+  width: "40%";
 `;
 
 const FileWrapper = styled.div`
-    width: 500px;  
-    border: 1.5px solid black;
-    border-radius: 1px; 
-    height: 30vh;
-    margin-top:8px;
-    display: flex;
-    flex-direction:column;
-    align-items: center;
-    justify-content: center
+  width: 500px;
+  border: 1.5px solid black;
+  border-radius: 1px;
+  height: 30vh;
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
 
 const FileToolBox = styled.div`
-    width: 200px;  
-    border: 1px dotted black;
-    border-radius: 1px; 
-    height: 120px;
-    display: flex;
-    flex-direction:column;
-    align-items: center;
-    justify-content: center
+  width: 200px;
+  border: 1px dotted black;
+  border-radius: 1px;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
 
 const UploadButton = styled.button`
   width: 100px;
   border: none;
   padding: 15px 20px;
-  background-color: #956C6E;
-  color:#FEECED;
+  background-color: #956c6e;
+  color: #feeced;
   font-size: 17px;
-  font-weight:600;
+  font-weight: 600;
   cursor: pointer;
 `;
 
@@ -207,370 +206,438 @@ const ClearButton = styled.button`
   border: none;
   padding: 15px 20px;
   background-color: red;
-  color:#FEECED;
+  color: #feeced;
   font-size: 17px;
-  font-weight:600;
+  font-weight: 600;
   cursor: pointer;
 `;
 
 const RegisterInstructor = () => {
-    const fileInputRef = useRef(null);
-    const [userDetails, setUserDetails] = useState({ fullName: "", email: "", address: "", userType: "instructor", password: "", confirmPassword: "", mobileNo: "", description: "", portfolio: "" })
-    const [openSnackbar, setOpenSnackbar] = useState(false);
-    const [snackbarType, setSnackbarType] = useState("");
-    const [snackbarMsg, setSnackbarMsg] = useState("");
-    const [selectedFile, setSelectedFile] = useState(null);
-    const [preview, setPreview] = useState(null)
-    const [disable, setDisable] = useState(false)
+  const fileInputRef = useRef(null);
+  const [userDetails, setUserDetails] = useState({
+    fullName: "",
+    email: "",
+    address: "",
+    userType: "instructor",
+    password: "",
+    mobileNo: "",
+    description: "",
+    portfolio: "",
+  });
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarType, setSnackbarType] = useState("");
+  const [snackbarMsg, setSnackbarMsg] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [preview, setPreview] = useState(null);
+  const [disable, setDisable] = useState(false);
 
-    const handleOpenSnackbar = () => {
-        setOpenSnackbar(true);
-    };
+  const handleOpenSnackbar = () => {
+    setOpenSnackbar(true);
+  };
 
-    const handleCloseSnackbar = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-
-        setOpenSnackbar(false);
-    };
-
-    const isValidEmail = (email) => {
-        return /\S+@\S+\.\S+/.test(email);
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
     }
 
-    const handleFileChange = (event) => {
-        if (fileInputRef.current && fileInputRef.current.files) {
-            setSelectedFile(fileInputRef.current.files[0])
-            setPreview(URL.createObjectURL(fileInputRef.current.files[0]))
-        }
-    };
+    setOpenSnackbar(false);
+  };
 
-    const handleClear = () => {
-        setPreview(null)
-        setSelectedFile(null)
+  const isValidEmail = (email) => {
+    return /\S+@\S+\.\S+/.test(email);
+  };
+
+  const handleFileChange = (event) => {
+    if (fileInputRef.current && fileInputRef.current.files) {
+      setSelectedFile(fileInputRef.current.files[0]);
+      setPreview(URL.createObjectURL(fileInputRef.current.files[0]));
     }
+  };
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        setDisable(true)
-        let formData = new FormData();
-        formData.append('file', selectedFile)
-        formData.append('fileName', selectedFile.name)
-        try {
-            const videoResult = await api.post('video/create', formData)
-            setUserDetails({ ...userDetails, portfolio: videoResult.data.publicLink })
-            if (userDetails.fullName !== "" && userDetails.email !== "" && userDetails.password !== "" && userDetails.confirmPassword !== "" && userDetails.description !== "" && userDetails.address !== "" && userDetails.mobileNo !== "" ) {
-                if (userDetails.password === userDetails.confirmPassword) {
-                    if (!isValidEmail(userDetails.email)) {
-                        setSnackbarType("error")
-                        setSnackbarMsg("Please enter a valid email")
-                        handleOpenSnackbar()
-                    } else {
-                        try {
-                            console.log('userDetails', userDetails)
-                            const result = await api.post('user/create', userDetails)
-                            console.log("result", result)
-                            setUserDetails({ fullName: "", email: "", userType: "instructor", password: "", confirmPassword: "", address: "", mobileNo: "", description: "", portfolio: "" })
-                            setSelectedFile(null)
-                            setPreview(null)
-                            setSnackbarType("success")
-                            setSnackbarMsg("User Created Successfully")
-                            setDisable(false)
-                            handleOpenSnackbar()
-                        } catch (error) {
-                            setDisable(false)
-                            setSnackbarType("error")
-                            setSnackbarMsg(error.response.data.message)
-                            handleOpenSnackbar()
-                        }
-                    }
-    
-    
-                } else {
-                    setDisable(false)
-                    setSnackbarType("error")
-                    setSnackbarMsg("Passwords are not matched")
-                    handleOpenSnackbar()
-                }
+  const handleClear = () => {
+    setPreview(null);
+    setSelectedFile(null);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setDisable(true);
+    let formData = new FormData();
+    formData.append("file", selectedFile);
+    formData.append("fileName", selectedFile.name);
+    try {
+      const videoResult = await api.post("video/create", formData);
+      setUserDetails({
+        ...userDetails,
+        portfolio: videoResult.data.publicLink,
+      });
+      if (
+        userDetails.fullName !== "" &&
+        userDetails.email !== "" &&
+        userDetails.password !== "" &&
+        confirmPassword !== "" &&
+        userDetails.description !== "" &&
+        userDetails.address !== "" &&
+        userDetails.mobileNo !== ""
+      ) {
+        if (userDetails.password === confirmPassword) {
+          if (!isValidEmail(userDetails.email)) {
+            setSnackbarType("error");
+            setSnackbarMsg("Please enter a valid email");
+            handleOpenSnackbar();
+          } else {
+            try {
+              console.log("userDetails", userDetails);
+              const result = await api.post("user/create", userDetails);
+              console.log("result", result);
+              setUserDetails({
+                fullName: "",
+                email: "",
+                userType: "instructor",
+                password: "",
+                address: "",
+                mobileNo: "",
+                description: "",
+                portfolio: "",
+              });
+              setConfirmPassword("");
+              setSelectedFile(null);
+              setPreview(null);
+              setSnackbarType("success");
+              setSnackbarMsg("User Created Successfully");
+              setDisable(false);
+              handleOpenSnackbar();
+            } catch (error) {
+              setDisable(false);
+              setSnackbarType("error");
+              setSnackbarMsg(error.response.data.message);
+              handleOpenSnackbar();
             }
-            else {
-                setDisable(false)
-                setSnackbarType("error")
-                setSnackbarMsg("Please fill all the fields")
-                handleOpenSnackbar()
-            }
-        } catch (error) {
-            setDisable(false)
-            setSnackbarType("error")
-            setSnackbarMsg("File upload fail")
-            handleOpenSnackbar()
+          }
+        } else {
+          setDisable(false);
+          setSnackbarType("error");
+          setSnackbarMsg("Passwords are not matched");
+          handleOpenSnackbar();
         }
-    };
+      } else {
+        setDisable(false);
+        setSnackbarType("error");
+        setSnackbarMsg("Please fill all the fields");
+        handleOpenSnackbar();
+      }
+    } catch (error) {
+      setDisable(false);
+      setSnackbarType("error");
+      setSnackbarMsg("File upload fail");
+      handleOpenSnackbar();
+    }
+  };
 
+  return (
+    <MainContainer>
+      <Navbar />
+      <Container>
+        <Snackbar
+          open={openSnackbar}
+          autoHideDuration={6000}
+          onClose={handleCloseSnackbar}
+        >
+          <Alert
+            onClose={handleCloseSnackbar}
+            severity={snackbarType}
+            sx={{ width: "100%" }}
+          >
+            {snackbarMsg}
+          </Alert>
+        </Snackbar>
+        <Wrapper>
+          <Title>REGISTER</Title>
 
-    return (
-        <MainContainer>
-            <Navbar />
-            <Container>
-                <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
-                    <Alert onClose={handleCloseSnackbar} severity={snackbarType} sx={{ width: '100%' }}>
-                        {snackbarMsg}
-                    </Alert>
-                </Snackbar>
-                <Wrapper>
-                    <Title>REGISTER</Title>
+          <TextField
+            label="Full Name"
+            id="fullName"
+            autoComplete="off"
+            value={userDetails.fullName}
+            onChange={(e) => {
+              setUserDetails({ ...userDetails, fullName: e.target.value });
+            }}
+            sx={{
+              "& .MuiInputBase-root": {
+                width: 500,
+              },
 
-                    <TextField
-                        label="Full Name"
-                        id="fullName"
-                        autoComplete='off'
-                        value={userDetails.fullName}
-                        onChange={(e) => { setUserDetails({ ...userDetails, fullName: e.target.value }) }}
-                        sx={{
-                            "& .MuiInputBase-root": {
-                                width: 500
-                            },
+              input: { color: "black", marginLeft: "8px" },
+              m: 1,
+              fieldset: { borderColor: "black" },
+              "& .MuiOutlinedInput-root.Mui-focused": {
+                "& > fieldset": {
+                  borderColor: "black",
+                },
+              },
+            }}
+            InputLabelProps={{
+              style: { color: "#000" },
+            }}
+            InputProps={{
+              sx: {
+                width: "100%",
+              },
+              startAdornment: <BadgeIcon style={{ color: "black" }} />,
+            }}
+          />
+          <TextField
+            label="E-mail"
+            onChange={(e) => {
+              setUserDetails({ ...userDetails, email: e.target.value });
+            }}
+            value={userDetails.email}
+            type="email"
+            id="email"
+            autoComplete="off"
+            sx={{
+              "& .MuiInputBase-root": {
+                width: 500,
+              },
+              input: { color: "black", marginLeft: "8px" },
+              m: 1,
+              fieldset: { borderColor: "black" },
+              "& .MuiOutlinedInput-root.Mui-focused": {
+                "& > fieldset": {
+                  borderColor: "black",
+                },
+              },
+            }}
+            InputLabelProps={{
+              style: { color: "#000" },
+            }}
+            InputProps={{
+              sx: {
+                width: "100%",
+              },
+              startAdornment: <MailOutlineIcon style={{ color: "black" }} />,
+            }}
+          />
 
-                            input: { color: 'black', marginLeft: '8px' },
-                            m: 1, fieldset: { borderColor: "black" },
-                            "& .MuiOutlinedInput-root.Mui-focused": {
-                                "& > fieldset": {
-                                    borderColor: "black"
-                                }
-                            }
+          <TextField
+            type="password"
+            label="Password"
+            onChange={(e) => {
+              setUserDetails({ ...userDetails, password: e.target.value });
+            }}
+            id="password"
+            value={userDetails.password}
+            sx={{
+              "& .MuiInputBase-root": {
+                width: 500,
+              },
+              input: { color: "black", marginLeft: "8px" },
+              m: 1,
+              fieldset: { borderColor: "black" },
+              "& .MuiOutlinedInput-root.Mui-focused": {
+                "& > fieldset": {
+                  borderColor: "black",
+                },
+              },
+            }}
+            InputLabelProps={{
+              style: { color: "#000" },
+            }}
+            InputProps={{
+              sx: {
+                width: "100%",
+              },
+              startAdornment: <KeyIcon style={{ color: "black" }} />,
+            }}
+          />
 
-                        }}
-                        InputLabelProps={{
-                            style: { color: '#000' },
-                        }}
-                        InputProps={{
-                            sx: {
-                                width: '100%'
-                            },
-                            startAdornment: <BadgeIcon style={{ color: 'black' }} />,
-                        }}
-                    />
-                    <TextField
-                        label="E-mail"
-                        onChange={(e) => { setUserDetails({ ...userDetails, email: e.target.value }) }}
-                        value={userDetails.email}
-                        type='email'
-                        id="email"
-                        autoComplete='off'
-                        sx={{
-                            "& .MuiInputBase-root": {
-                                width: 500
-                            },
-                            input: { color: 'black', marginLeft: '8px' },
-                            m: 1, fieldset: { borderColor: "black" },
-                            "& .MuiOutlinedInput-root.Mui-focused": {
-                                "& > fieldset": {
-                                    borderColor: "black"
-                                }
-                            }
-                        }}
-                        InputLabelProps={{
-                            style: { color: '#000' },
-                        }}
-                        InputProps={{
-                            sx: {
-                                width: '100%'
-                            },
-                            startAdornment: <MailOutlineIcon style={{ color: 'black' }} />,
-                        }}
-                    />
+          <TextField
+            type="password"
+            label="Confirm Password"
+            onChange={(e) => {
+              setConfirmPassword(e.target.value);
+            }}
+            id="confirmPassword"
+            value={confirmPassword}
+            sx={{
+              "& .MuiInputBase-root": {
+                width: 500,
+              },
+              input: { color: "black", marginLeft: "8px" },
+              m: 1,
+              fieldset: { borderColor: "black" },
+              "& .MuiOutlinedInput-root.Mui-focused": {
+                "& > fieldset": {
+                  borderColor: "black",
+                },
+              },
+            }}
+            InputLabelProps={{
+              style: { color: "#000" },
+            }}
+            InputProps={{
+              sx: {
+                width: "100%",
+              },
+              startAdornment: <KeyIcon style={{ color: "black" }} />,
+            }}
+          />
 
-                    <TextField
-                        type='password'
-                        label="Password"
-                        onChange={(e) => { setUserDetails({ ...userDetails, password: e.target.value }) }}
-                        id="password"
-                        value={userDetails.password}
-                        sx={{
-                            "& .MuiInputBase-root": {
-                                width: 500
-                            },
-                            input: { color: 'black', marginLeft: '8px' },
-                            m: 1, fieldset: { borderColor: "black" },
-                            "& .MuiOutlinedInput-root.Mui-focused": {
-                                "& > fieldset": {
-                                    borderColor: "black"
-                                }
-                            }
-                        }}
-                        InputLabelProps={{
-                            style: { color: '#000' },
-                        }}
-                        InputProps={{
-                            sx: {
-                                width: '100%'
-                            },
-                            startAdornment: <KeyIcon style={{ color: 'black' }} />,
-                        }}
+          <TextField
+            label="Address"
+            id="fullName"
+            autoComplete="off"
+            value={userDetails.address}
+            onChange={(e) => {
+              setUserDetails({ ...userDetails, address: e.target.value });
+            }}
+            sx={{
+              "& .MuiInputBase-root": {
+                width: 500,
+              },
 
-                    />
+              input: { color: "black", marginLeft: "8px" },
+              m: 1,
+              fieldset: { borderColor: "black" },
+              "& .MuiOutlinedInput-root.Mui-focused": {
+                "& > fieldset": {
+                  borderColor: "black",
+                },
+              },
+            }}
+            InputLabelProps={{
+              style: { color: "#000" },
+            }}
+            InputProps={{
+              sx: {
+                width: "100%",
+              },
+              startAdornment: <HomeIcon style={{ color: "black" }} />,
+            }}
+          />
 
-                    <TextField
-                        type='password'
-                        label="Confirm Password"
-                        onChange={(e) => { setUserDetails({ ...userDetails, confirmPassword: e.target.value }) }}
-                        id="confirmPassword"
-                        value={userDetails.confirmPassword}
-                        sx={{
-                            "& .MuiInputBase-root": {
-                                width: 500
-                            },
-                            input: { color: 'black', marginLeft: '8px' },
-                            m: 1, fieldset: { borderColor: "black" },
-                            "& .MuiOutlinedInput-root.Mui-focused": {
-                                "& > fieldset": {
-                                    borderColor: "black"
-                                }
-                            }
-                        }}
-                        InputLabelProps={{
-                            style: { color: '#000' },
-                        }}
-                        InputProps={{
-                            sx: {
-                                width: '100%'
-                            },
-                            startAdornment: <KeyIcon style={{ color: 'black' }} />,
-                        }}
-                    />
+          <TextField
+            label="Mobile Number"
+            id="mobileNo"
+            type="tel"
+            autoComplete="off"
+            value={userDetails.mobileNo}
+            onChange={(e) => {
+              setUserDetails({ ...userDetails, mobileNo: e.target.value });
+            }}
+            sx={{
+              "& .MuiInputBase-root": {
+                width: 500,
+              },
 
-                    <TextField
-                        label="Address"
-                        id="fullName"
-                        autoComplete='off'
-                        value={userDetails.address}
-                        onChange={(e) => { setUserDetails({ ...userDetails, address: e.target.value }) }}
-                        sx={{
-                            "& .MuiInputBase-root": {
-                                width: 500
-                            },
+              input: { color: "black", marginLeft: "8px" },
+              m: 1,
+              fieldset: { borderColor: "black" },
+              "& .MuiOutlinedInput-root.Mui-focused": {
+                "& > fieldset": {
+                  borderColor: "black",
+                },
+              },
+            }}
+            InputLabelProps={{
+              style: { color: "#000" },
+            }}
+            InputProps={{
+              sx: {
+                width: "100%",
+              },
+              startAdornment: <CallIcon style={{ color: "black" }} />,
+            }}
+          />
+          <TextField
+            id="description"
+            name="description"
+            label="Description"
+            autoComplete="description"
+            value={userDetails.description}
+            onChange={(e) => {
+              setUserDetails({ ...userDetails, description: e.target.value });
+            }}
+            variant="outlined"
+            multiline
+            rows={4}
+            sx={{
+              "& .MuiInputBase-root": {
+                width: 500,
+              },
 
-                            input: { color: 'black', marginLeft: '8px' },
-                            m: 1, fieldset: { borderColor: "black" },
-                            "& .MuiOutlinedInput-root.Mui-focused": {
-                                "& > fieldset": {
-                                    borderColor: "black"
-                                }
-                            }
-
-                        }}
-                        InputLabelProps={{
-                            style: { color: '#000' },
-                        }}
-                        InputProps={{
-                            sx: {
-                                width: '100%'
-                            },
-                            startAdornment: <HomeIcon style={{ color: 'black' }} />,
-                        }}
-                    />
-
-                    <TextField
-                        label="Mobile Number"
-                        id="mobileNo"
-                        type="tel"
-                        autoComplete='off'
-                        value={userDetails.mobileNo}
-                        onChange={(e) => { setUserDetails({ ...userDetails, mobileNo: e.target.value }) }}
-                        sx={{
-                            "& .MuiInputBase-root": {
-                                width: 500
-                            },
-
-                            input: { color: 'black', marginLeft: '8px' },
-                            m: 1, fieldset: { borderColor: "black" },
-                            "& .MuiOutlinedInput-root.Mui-focused": {
-                                "& > fieldset": {
-                                    borderColor: "black"
-                                }
-                            }
-
-                        }}
-                        InputLabelProps={{
-                            style: { color: '#000' },
-                        }}
-                        InputProps={{
-                            sx: {
-                                width: '100%'
-                            },
-                            startAdornment: <CallIcon style={{ color: 'black' }} />,
-                        }}
-                    />
-                    <TextField
-                        id="description"
-                        name="description"
-                        label="Description"
-                        
-                        autoComplete="description"
-                        value={userDetails.description}
-                        onChange={(e) => { setUserDetails({ ...userDetails, description: e.target.value }) }}
-                        variant="outlined"
-                        multiline
-                        rows={4}
-                        sx={{
-                            "& .MuiInputBase-root": {
-                                width: 500
-                            },
-
-                            input: { color: 'black', marginLeft: '8px' },
-                            m: 1, fieldset: { borderColor: "black" },
-                            "& .MuiOutlinedInput-root.Mui-focused": {
-                                "& > fieldset": {
-                                    borderColor: "black"
-                                }
-                            }
-
-                        }}
-                        InputLabelProps={{
-                            style: { color: '#000' },
-                        }}
-                        InputProps={{
-                            sx: {
-                                width: '100%'
-                            },
-                        }}
-                    />
-                    {preview ?
-                        <Box sx={{ position: 'relative', marginTop:'8px'}}>
-                            <ReactPlayer height={"300px"} width={"500px"} url={preview} controls={true} />
-                            <IconButton sx={{ position: 'absolute', top: 5, right: 0, color: 'red' }} aria-label="upload">
-                                <CloseIcon onClick={handleClear} />
-                            </IconButton>
-                        </Box>
-                        :
-                        <FileWrapper onClick={() => fileInputRef.current?.click()}>
-                            <Input style={{ display: 'none' }} type="file" ref={fileInputRef} onChange={handleFileChange} />
-                            <IconButton aria-label="upload">
-                                <AddIcon />
-                            </IconButton>
-                            <Typography>Add a Photo or Video</Typography>
-                        </FileWrapper>
-                    }
-                    {/* {preview &&
+              input: { color: "black", marginLeft: "8px" },
+              m: 1,
+              fieldset: { borderColor: "black" },
+              "& .MuiOutlinedInput-root.Mui-focused": {
+                "& > fieldset": {
+                  borderColor: "black",
+                },
+              },
+            }}
+            InputLabelProps={{
+              style: { color: "#000" },
+            }}
+            InputProps={{
+              sx: {
+                width: "100%",
+              },
+            }}
+          />
+          {preview ? (
+            <Box sx={{ position: "relative", marginTop: "8px" }}>
+              <ReactPlayer
+                height={"300px"}
+                width={"500px"}
+                url={preview}
+                controls={true}
+              />
+              <IconButton
+                sx={{ position: "absolute", top: 5, right: 0, color: "red" }}
+                aria-label="upload"
+              >
+                <CloseIcon onClick={handleClear} />
+              </IconButton>
+            </Box>
+          ) : (
+            <FileWrapper onClick={() => fileInputRef.current?.click()}>
+              <Input
+                style={{ display: "none" }}
+                type="file"
+                ref={fileInputRef}
+                onChange={handleFileChange}
+              />
+              <IconButton aria-label="upload">
+                <AddIcon />
+              </IconButton>
+              <Typography>Add a Photo or Video</Typography>
+            </FileWrapper>
+          )}
+          {/* {preview &&
                         <FileToolBox>
                             <UploadButton onClick={handleUpload}>Upload</UploadButton>
                             <ClearButton onClick={handleClear}>Clear</ClearButton>
                         </FileToolBox>
                     } */}
 
-                    <ButtonContainer >
-                        {/* <Button onClick={(e) => handleSubmit(e)}>SIGN UP</Button> */}
-                        <Button disabled={disable} onClick={(e) => handleSubmit(e)}>Register</Button>
-                    </ButtonContainer>
-                    <SignUpDiv>
-                        Already have an account
-                        <Link style={{ textDecoration: 'none' }} to="/login"> <SignUpSpan>Log In</SignUpSpan></Link>
-                    </SignUpDiv>
-                </Wrapper>
-            </Container>
-        </MainContainer>
-    );
+          <ButtonContainer>
+            {/* <Button onClick={(e) => handleSubmit(e)}>SIGN UP</Button> */}
+            <Button disabled={disable} onClick={(e) => handleSubmit(e)}>
+              Register
+            </Button>
+          </ButtonContainer>
+          <SignUpDiv>
+            Already have an account
+            <Link style={{ textDecoration: "none" }} to="/login">
+              {" "}
+              <SignUpSpan>Log In</SignUpSpan>
+            </Link>
+          </SignUpDiv>
+        </Wrapper>
+      </Container>
+    </MainContainer>
+  );
 };
 
 export default RegisterInstructor;
