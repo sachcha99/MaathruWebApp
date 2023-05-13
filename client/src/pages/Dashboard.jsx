@@ -244,7 +244,21 @@ const Dashboard = () => {
                           />
                         </IconButton>
                       </Box>
-                      {!user.isVerified === 'approved'|| 'Rejected'? (
+                      {user.isVerified === "approved" ||
+                      user.isVerified === "rejected" ? (
+                        <StatusButton>
+                          {user.isVerified === "approved"
+                            ? "Approved"
+                            : "Rejected"}
+                          <Dot
+                            style={
+                              user.isVerified === "approved"
+                                ? { backgroundColor: "green" }
+                                : { backgroundColor: "red" }
+                            }
+                          />
+                        </StatusButton>
+                      ) : (
                         <Box
                           sx={{
                             display: "flex",
@@ -260,24 +274,11 @@ const Dashboard = () => {
                             Approve
                           </ApproveButton>
                           <RejectButton
-                            onClick={() => handleOnPress(user?._id, "Rejected")}
+                            onClick={() => handleOnPress(user?._id, "rejected")}
                           >
                             Reject
                           </RejectButton>
                         </Box>
-                      ) : (
-                        <StatusButton>
-                          {user.isVerified === "approved"
-                            ? "Approved"
-                            : "Rejected"}
-                          <Dot
-                            style={
-                              user.isVerified === "approved"
-                                ? { backgroundColor: "green" }
-                                : { backgroundColor: "red" }
-                            }
-                          />
-                        </StatusButton>
                       )}
                     </Box>
                   </Box>
