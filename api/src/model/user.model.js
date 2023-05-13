@@ -5,11 +5,11 @@ const UserSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true },
     userType: { type: String, required: true },
     password: { type: String, required: true },
-    confirmPassword: { type: String },
     birthDate: {type: Date},
     address: {type: String, required: true},
     mobileNo: {type: String, required: true},
     pregnancyDate: {type: Date},
+    isVerified: { type: String },
 },{
     timestamps:true
 });
