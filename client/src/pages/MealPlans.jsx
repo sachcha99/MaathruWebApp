@@ -101,67 +101,21 @@ const MealPlans = () => {
                                 </Grid>
                                 <Grid  style={{borderLeft:"1px solid #956C6E", paddingBlock: '15px'}} item xs={3}>
                                 <MealsTitle>Breakfast</MealsTitle>
-                                <MealsField>Food 1 - Dummy Food Name</MealsField>
-                                <MealsField>Food 2 - Dummy Food Name</MealsField>
-                                <MealsField>Food 3 - Dummy Food Name</MealsField>
-                                <MealsField>Food 4 - Dummy Food Name</MealsField>
-                                <MealsField>Food 5 - Dummy Food Name</MealsField>
-                                <MealsField>Snack 1 - Dummy Snack Name</MealsField>
+                                <MealsField>Food - Greek yogurt with berries</MealsField>
+                                <MealsField>Chia seeds</MealsField>
+                                <MealsField>Snack - Energy balls</MealsField>
 
                                 </Grid>
                                 <Grid  style={{borderLeft:"1px solid #956C6E"}}  item xs={3}>
                                 <MealsTitle>Lunch</MealsTitle>
-                                <MealsField>Food 1 - Dummy Food Name</MealsField>
-                                <MealsField>Food 2 - Dummy Food Name</MealsField>
-                                <MealsField>Food 3 - Dummy Food Name</MealsField>
-                                <MealsField>Food 4 - Dummy Food Name</MealsField>
-                                <MealsField>Food 5 - Dummy Food Name</MealsField>
-                                <MealsField>Snack 1 - Dummy Snack Name</MealsField>                                </Grid>
+                                <MealsField>Food - Bean burritos</MealsField>                               
+                                </Grid>
                                 <Grid  style={{borderLeft:"1px solid #956C6E"}} item xs={3}>
                                 <MealsTitle>Dinner</MealsTitle>
-                                <MealsField>Food 1 - Dummy Food Name</MealsField>
-                                <MealsField>Food 2 - Dummy Food Name</MealsField>
-                                <MealsField>Food 3 - Dummy Food Name</MealsField>
-                                <MealsField>Food 4 - Dummy Food Name</MealsField>
-                                <MealsField>Food 5 - Dummy Food Name</MealsField>
-                                <MealsField>Snack 1 - Dummy Snack Name</MealsField>                                </Grid>
+                                <MealsField>Food  - Shredded chicken sandwiches</MealsField>                               
+                                </Grid>
                             </Grid>
                         </Stack>
-
-                        <Stack >
-                            <Grid  container spacing={0}>
-                                <Grid item xs={3}>
-                                    <DayField>Day 1</DayField>
-                                </Grid>
-                                <Grid  style={{borderLeft:"1px solid #956C6E", paddingBlock: '15px'}} item xs={3}>
-                                <MealsTitle>Breakfast</MealsTitle>
-                                <MealsField>Food 1 - Dummy Food Name</MealsField>
-                                <MealsField>Food 2 - Dummy Food Name</MealsField>
-                                <MealsField>Food 3 - Dummy Food Name</MealsField>
-                                <MealsField>Food 4 - Dummy Food Name</MealsField>
-                                <MealsField>Food 5 - Dummy Food Name</MealsField>
-                                <MealsField>Snack 1 - Dummy Snack Name</MealsField>
-
-                                </Grid>
-                                <Grid  style={{borderLeft:"1px solid #956C6E"}}  item xs={3}>
-                                <MealsTitle>Lunch</MealsTitle>
-                                <MealsField>Food 1 - Dummy Food Name</MealsField>
-                                <MealsField>Food 2 - Dummy Food Name</MealsField>
-                                <MealsField>Food 3 - Dummy Food Name</MealsField>
-                                <MealsField>Food 4 - Dummy Food Name</MealsField>
-                                <MealsField>Food 5 - Dummy Food Name</MealsField>
-                                <MealsField>Snack 1 - Dummy Snack Name</MealsField>                                </Grid>
-                                <Grid  style={{borderLeft:"1px solid #956C6E"}} item xs={3}>
-                                <MealsTitle>Dinner</MealsTitle>
-                                <MealsField>Food 1 - Dummy Food Name</MealsField>
-                                <MealsField>Food 2 - Dummy Food Name</MealsField>
-                                <MealsField>Food 3 - Dummy Food Name</MealsField>
-                                <MealsField>Food 4 - Dummy Food Name</MealsField>
-                                <MealsField>Food 5 - Dummy Food Name</MealsField>
-                                <MealsField>Snack 1 - Dummy Snack Name</MealsField>                                </Grid>
-                            </Grid>
-                        </Stack>
-
 
                         <Stack >
                             <Grid  container spacing={0}>
@@ -170,30 +124,18 @@ const MealPlans = () => {
                                 </Grid>
                                 <Grid  style={{borderLeft:"1px solid #956C6E", paddingBlock: '15px'}} item xs={3}>
                                 <MealsTitle>Breakfast</MealsTitle>
-                                <MealsField>Food 1 - Dummy Food Name</MealsField>
-                                <MealsField>Food 2 - Dummy Food Name</MealsField>
-                                <MealsField>Food 3 - Dummy Food Name</MealsField>
-                                <MealsField>Food 4 - Dummy Food Name</MealsField>
-                                <MealsField>Food 5 - Dummy Food Name</MealsField>
-                                <MealsField>Snack 1 - Dummy Snack Name</MealsField>
+                                <MealsField>Food - 2 eggs with whole wheat toas</MealsField>
 
                                 </Grid>
                                 <Grid  style={{borderLeft:"1px solid #956C6E"}}  item xs={3}>
                                 <MealsTitle>Lunch</MealsTitle>
-                                <MealsField>Food 1 - Dummy Food Name</MealsField>
-                                <MealsField>Food 2 - Dummy Food Name</MealsField>
-                                <MealsField>Food 3 - Dummy Food Name</MealsField>
-                                <MealsField>Food 4 - Dummy Food Name</MealsField>
-                                <MealsField>Food 5 - Dummy Food Name</MealsField>
-                                <MealsField>Snack 1 - Dummy Snack Name</MealsField>                                </Grid>
+                                <MealsField>Food - Chicken salad wrap</MealsField>
+                                <MealsField>Snack - slices of cheese</MealsField>                                
+                                </Grid>
                                 <Grid  style={{borderLeft:"1px solid #956C6E"}} item xs={3}>
                                 <MealsTitle>Dinner</MealsTitle>
-                                <MealsField>Food 1 - Dummy Food Name</MealsField>
-                                <MealsField>Food 2 - Dummy Food Name</MealsField>
-                                <MealsField>Food 3 - Dummy Food Name</MealsField>
-                                <MealsField>Food 4 - Dummy Food Name</MealsField>
-                                <MealsField>Food 5 - Dummy Food Name</MealsField>
-                                <MealsField>Snack 1 - Dummy Snack Name</MealsField>                                </Grid>
+                                <MealsField>Food - Veggie, chicken, or turkey tacos</MealsField>                         
+                                </Grid>
                             </Grid>
                         </Stack>
 
@@ -205,30 +147,20 @@ const MealPlans = () => {
                                 </Grid>
                                 <Grid  style={{borderLeft:"1px solid #956C6E", paddingBlock: '15px'}} item xs={3}>
                                 <MealsTitle>Breakfast</MealsTitle>
-                                <MealsField>Food 1 - Dummy Food Name</MealsField>
-                                <MealsField>Food 2 - Dummy Food Name</MealsField>
-                                <MealsField>Food 3 - Dummy Food Name</MealsField>
-                                <MealsField>Food 4 - Dummy Food Name</MealsField>
-                                <MealsField>Food 5 - Dummy Food Name</MealsField>
-                                <MealsField>Snack 1 - Dummy Snack Name</MealsField>
+                                <MealsField>Steel - cut oats with berries and walnuts</MealsField>
 
                                 </Grid>
                                 <Grid  style={{borderLeft:"1px solid #956C6E"}}  item xs={3}>
                                 <MealsTitle>Lunch</MealsTitle>
-                                <MealsField>Food 1 - Dummy Food Name</MealsField>
-                                <MealsField>Food 2 - Dummy Food Name</MealsField>
-                                <MealsField>Food 3 - Dummy Food Name</MealsField>
-                                <MealsField>Food 4 - Dummy Food Name</MealsField>
-                                <MealsField>Food 5 - Dummy Food Name</MealsField>
-                                <MealsField>Snack 1 - Dummy Snack Name</MealsField>                                </Grid>
+                                <MealsField>Food - Avocado toast with sliced cheese</MealsField>
+                                <MealsField>and fruit</MealsField>
+                                <MealsField>Snack - Cut vegetables with dressing</MealsField>                                
+                                </Grid>
                                 <Grid  style={{borderLeft:"1px solid #956C6E"}} item xs={3}>
                                 <MealsTitle>Dinner</MealsTitle>
-                                <MealsField>Food 1 - Dummy Food Name</MealsField>
-                                <MealsField>Food 2 - Dummy Food Name</MealsField>
-                                <MealsField>Food 3 - Dummy Food Name</MealsField>
-                                <MealsField>Food 4 - Dummy Food Name</MealsField>
-                                <MealsField>Food 5 - Dummy Food Name</MealsField>
-                                <MealsField>Snack 1 - Dummy Snack Name</MealsField>                                </Grid>
+                                <MealsField>Food - Vegetable, tofu, chicken, or </MealsField>  
+                                <MealsField>shrimp stir fry with rice</MealsField>                             
+                                </Grid>
                             </Grid>
                         </Stack>
 
@@ -240,30 +172,20 @@ const MealPlans = () => {
                                 </Grid>
                                 <Grid  style={{borderLeft:"1px solid #956C6E", paddingBlock: '15px'}} item xs={3}>
                                 <MealsTitle>Breakfast</MealsTitle>
-                                <MealsField>Food 1 - Dummy Food Name</MealsField>
-                                <MealsField>Food 2 - Dummy Food Name</MealsField>
-                                <MealsField>Food 3 - Dummy Food Name</MealsField>
-                                <MealsField>Food 4 - Dummy Food Name</MealsField>
-                                <MealsField>Food 5 - Dummy Food Name</MealsField>
-                                <MealsField>Snack 1 - Dummy Snack Name</MealsField>
+                                <MealsField>Food - Egg quiche with a side </MealsField>
+                                <MealsField>of fruit</MealsField>
 
                                 </Grid>
                                 <Grid  style={{borderLeft:"1px solid #956C6E"}}  item xs={3}>
                                 <MealsTitle>Lunch</MealsTitle>
-                                <MealsField>Food 1 - Dummy Food Name</MealsField>
-                                <MealsField>Food 2 - Dummy Food Name</MealsField>
-                                <MealsField>Food 3 - Dummy Food Name</MealsField>
-                                <MealsField>Food 4 - Dummy Food Name</MealsField>
-                                <MealsField>Food 5 - Dummy Food Name</MealsField>
-                                <MealsField>Snack 1 - Dummy Snack Name</MealsField>                                </Grid>
+                                <MealsField>Food - Salad with sliced chicken </MealsField>
+                                <MealsField>or tofu</MealsField>
+                                <MealsField>Snack - Nuts and fruit</MealsField>                                
+                                </Grid>
                                 <Grid  style={{borderLeft:"1px solid #956C6E"}} item xs={3}>
                                 <MealsTitle>Dinner</MealsTitle>
-                                <MealsField>Food 1 - Dummy Food Name</MealsField>
-                                <MealsField>Food 2 - Dummy Food Name</MealsField>
-                                <MealsField>Food 3 - Dummy Food Name</MealsField>
-                                <MealsField>Food 4 - Dummy Food Name</MealsField>
-                                <MealsField>Food 5 - Dummy Food Name</MealsField>
-                                <MealsField>Snack 1 - Dummy Snack Name</MealsField>                                </Grid>
+                                <MealsField>Food - Bean burrito bowl</MealsField>                                
+                                </Grid>
                             </Grid>
                         </Stack>
 
@@ -275,30 +197,19 @@ const MealPlans = () => {
                                 </Grid>
                                 <Grid  style={{borderLeft:"1px solid #956C6E", paddingBlock: '15px'}} item xs={3}>
                                 <MealsTitle>Breakfast</MealsTitle>
-                                <MealsField>Food 1 - Dummy Food Name</MealsField>
-                                <MealsField>Food 2 - Dummy Food Name</MealsField>
-                                <MealsField>Food 3 - Dummy Food Name</MealsField>
-                                <MealsField>Food 4 - Dummy Food Name</MealsField>
-                                <MealsField>Food 5 - Dummy Food Name</MealsField>
-                                <MealsField>Snack 1 - Dummy Snack Name</MealsField>
+                                <MealsField>Food - Bagel sandwich</MealsField>
+                                <MealsField>Snack - Fruit protein smoothie</MealsField>
 
                                 </Grid>
                                 <Grid  style={{borderLeft:"1px solid #956C6E"}}  item xs={3}>
                                 <MealsTitle>Lunch</MealsTitle>
-                                <MealsField>Food 1 - Dummy Food Name</MealsField>
-                                <MealsField>Food 2 - Dummy Food Name</MealsField>
-                                <MealsField>Food 3 - Dummy Food Name</MealsField>
-                                <MealsField>Food 4 - Dummy Food Name</MealsField>
-                                <MealsField>Food 5 - Dummy Food Name</MealsField>
-                                <MealsField>Snack 1 - Dummy Snack Name</MealsField>                                </Grid>
+                                <MealsField>Food - Tuna salad sandwich</MealsField>                                
+                                </Grid>
                                 <Grid  style={{borderLeft:"1px solid #956C6E"}} item xs={3}>
                                 <MealsTitle>Dinner</MealsTitle>
-                                <MealsField>Food 1 - Dummy Food Name</MealsField>
-                                <MealsField>Food 2 - Dummy Food Name</MealsField>
-                                <MealsField>Food 3 - Dummy Food Name</MealsField>
-                                <MealsField>Food 4 - Dummy Food Name</MealsField>
-                                <MealsField>Food 5 - Dummy Food Name</MealsField>
-                                <MealsField>Snack 1 - Dummy Snack Name</MealsField>                                </Grid>
+                                <MealsField>Food - Tortellini with chicken </MealsField>
+                                <MealsField>and vegetables</MealsField>                            
+                                </Grid>
                             </Grid>
                         </Stack>
 
@@ -310,30 +221,18 @@ const MealPlans = () => {
                                 </Grid>
                                 <Grid  style={{borderLeft:"1px solid #956C6E", paddingBlock: '15px'}} item xs={3}>
                                 <MealsTitle>Breakfast</MealsTitle>
-                                <MealsField>Food 1 - Dummy Food Name</MealsField>
-                                <MealsField>Food 2 - Dummy Food Name</MealsField>
-                                <MealsField>Food 3 - Dummy Food Name</MealsField>
-                                <MealsField>Food 4 - Dummy Food Name</MealsField>
-                                <MealsField>Food 5 - Dummy Food Name</MealsField>
-                                <MealsField>Snack 1 - Dummy Snack Name</MealsField>
+                                <MealsField>Food - Granola with milk</MealsField>
+                                <MealsField>Snack - Tex mex chicken quinoa</MealsField>
 
                                 </Grid>
                                 <Grid  style={{borderLeft:"1px solid #956C6E"}}  item xs={3}>
                                 <MealsTitle>Lunch</MealsTitle>
-                                <MealsField>Food 1 - Dummy Food Name</MealsField>
-                                <MealsField>Food 2 - Dummy Food Name</MealsField>
-                                <MealsField>Food 3 - Dummy Food Name</MealsField>
-                                <MealsField>Food 4 - Dummy Food Name</MealsField>
-                                <MealsField>Food 5 - Dummy Food Name</MealsField>
-                                <MealsField>Snack 1 - Dummy Snack Name</MealsField>                                </Grid>
+                                <MealsField>Food - Apple with peanut butter</MealsField>                               
+                                </Grid>
                                 <Grid  style={{borderLeft:"1px solid #956C6E"}} item xs={3}>
                                 <MealsTitle>Dinner</MealsTitle>
-                                <MealsField>Food 1 - Dummy Food Name</MealsField>
-                                <MealsField>Food 2 - Dummy Food Name</MealsField>
-                                <MealsField>Food 3 - Dummy Food Name</MealsField>
-                                <MealsField>Food 4 - Dummy Food Name</MealsField>
-                                <MealsField>Food 5 - Dummy Food Name</MealsField>
-                                <MealsField>Snack 1 - Dummy Snack Name</MealsField>                                </Grid>
+                                <MealsField>Food - Fish and vegetable side</MealsField>                            
+                                </Grid>
                             </Grid>
                         </Stack>
 
@@ -345,30 +244,19 @@ const MealPlans = () => {
                                 </Grid>
                                 <Grid  style={{borderLeft:"1px solid #956C6E", paddingBlock: '15px'}} item xs={3}>
                                 <MealsTitle>Breakfast</MealsTitle>
-                                <MealsField>Food 1 - Dummy Food Name</MealsField>
-                                <MealsField>Food 2 - Dummy Food Name</MealsField>
-                                <MealsField>Food 3 - Dummy Food Name</MealsField>
-                                <MealsField>Food 4 - Dummy Food Name</MealsField>
-                                <MealsField>Food 5 - Dummy Food Name</MealsField>
-                                <MealsField>Snack 1 - Dummy Snack Name</MealsField>
+                                <MealsField>Food -  Fruit protein smoothie</MealsField>
 
                                 </Grid>
                                 <Grid  style={{borderLeft:"1px solid #956C6E"}}  item xs={3}>
                                 <MealsTitle>Lunch</MealsTitle>
-                                <MealsField>Food 1 - Dummy Food Name</MealsField>
-                                <MealsField>Food 2 - Dummy Food Name</MealsField>
-                                <MealsField>Food 3 - Dummy Food Name</MealsField>
-                                <MealsField>Food 4 - Dummy Food Name</MealsField>
-                                <MealsField>Food 5 - Dummy Food Name</MealsField>
-                                <MealsField>Snack 1 - Dummy Snack Name</MealsField>                                </Grid>
+                                <MealsField>Food -  Vegetable salad and brown rice</MealsField>
+                                <MealsField>Snack - veggies with hummus</MealsField>                               
+                                </Grid>
                                 <Grid  style={{borderLeft:"1px solid #956C6E"}} item xs={3}>
                                 <MealsTitle>Dinner</MealsTitle>
-                                <MealsField>Food 1 - Dummy Food Name</MealsField>
-                                <MealsField>Food 2 - Dummy Food Name</MealsField>
-                                <MealsField>Food 3 - Dummy Food Name</MealsField>
-                                <MealsField>Food 4 - Dummy Food Name</MealsField>
-                                <MealsField>Food 5 - Dummy Food Name</MealsField>
-                                <MealsField>Snack 1 - Dummy Snack Name</MealsField>                                </Grid>
+                                <MealsField>Food - Pork chops and sweet potatoes</MealsField>
+                                <MealsField>with soup</MealsField>                                 
+                                </Grid>
                             </Grid>
                         </Stack>
                     </Wrapper>
