@@ -1,9 +1,7 @@
 import { useRef } from "react";
 import styled from "styled-components";
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormControl from "@mui/material/FormControl";
+import { Uploader } from "uploader";
+import { UploadDropzone } from "react-uploader";
 import { Link } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import BadgeIcon from "@mui/icons-material/Badge";
@@ -27,6 +25,7 @@ import dayjs from "dayjs";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import api from "../api";
 import { Box, IconButton, Typography } from "@mui/material";
+import { useEffect } from "react";
 
 // import API from './../api'
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -223,6 +222,7 @@ const RegisterInstructor = () => {
     mobileNo: "",
     description: "",
     portfolio: "",
+    report: "",
   });
   const [confirmPassword, setConfirmPassword] = useState("");
   const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -231,6 +231,7 @@ const RegisterInstructor = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [preview, setPreview] = useState(null);
   const [disable, setDisable] = useState(false);
+  const [imageUrl, setImageUrl] = useState();
 
   const handleOpenSnackbar = () => {
     setOpenSnackbar(true);
@@ -248,6 +249,13 @@ const RegisterInstructor = () => {
     return /\S+@\S+\.\S+/.test(email);
   };
 
+  useEffect(() => {
+    if (imageUrl) {
+      console.log("imageUrl:::", imageUrl);
+      setUserDetails({ ...userDetails, report: imageUrl });
+    }
+  }, [imageUrl]);
+
   const handleFileChange = (event) => {
     if (fileInputRef.current && fileInputRef.current.files) {
       setSelectedFile(fileInputRef.current.files[0]);
@@ -260,17 +268,20 @@ const RegisterInstructor = () => {
     setSelectedFile(null);
   };
 
+  console.log(userDetails.report);
+
   const handleSubmit = async (event) => {
+    console.log(userDetails.report);
     event.preventDefault();
     setDisable(true);
     try {
-        let videoResult = null
-        if(selectedFile){
-            let formData = new FormData();
-            formData.append("file", selectedFile);
-            formData.append("fileName", selectedFile.name);
-            videoResult = await api.post("video/create", formData);
-        }
+      let videoResult = null;
+      if (selectedFile) {
+        let formData = new FormData();
+        formData.append("file", selectedFile);
+        formData.append("fileName", selectedFile.name);
+        videoResult = await api.post("video/create", formData);
+      }
       if (
         userDetails.fullName !== "" &&
         userDetails.email !== "" &&
@@ -279,6 +290,7 @@ const RegisterInstructor = () => {
         userDetails.description !== "" &&
         userDetails.address !== "" &&
         userDetails.mobileNo !== ""
+        // userDetails.report !== ""
       ) {
         if (userDetails.password === confirmPassword) {
           if (!isValidEmail(userDetails.email)) {
@@ -288,7 +300,10 @@ const RegisterInstructor = () => {
           } else {
             try {
               console.log("userDetails", userDetails);
-              const result = await api.post("user/create", {...userDetails, portfolio: videoResult ? videoResult.data.publicLink: ''});
+              const result = await api.post("user/create", {
+                ...userDetails,
+                portfolio: videoResult ? videoResult.data.publicLink : "",
+              });
               console.log("result", result);
               setUserDetails({
                 fullName: "",
@@ -299,6 +314,7 @@ const RegisterInstructor = () => {
                 mobileNo: "",
                 description: "",
                 portfolio: "",
+                report: "",
               });
               setConfirmPassword("");
               setSelectedFile(null);
@@ -613,12 +629,33 @@ const RegisterInstructor = () => {
               <Typography>Add a Photo or Video</Typography>
             </FileWrapper>
           )}
-          {/* {preview &&
-                        <FileToolBox>
-                            <UploadButton onClick={handleUpload}>Upload</UploadButton>
-                            <ClearButton onClick={handleClear}>Clear</ClearButton>
-                        </FileToolBox>
-                    } */}
+          <Typography
+            sx={{
+              marginTop: "10px",
+              marginBottom: "2px",
+              fontWeight: "bold",
+              fontSize: "20px",
+              textAlign: "left",
+            }}
+          >
+            Upload Reports
+          </Typography>
+          <UploadDropzone
+            uploader={Uploader({ apiKey: "free" })} // Required.
+            options={{ multi: false }} // Optional.
+            width="90%" // Optional.
+            height="350px" // Optional.
+            onUpdate={(files) => {
+              // Optional.
+              if (files.length === 0) {
+                console.log("No files selected.");
+              } else {
+                console.log("Files uploaded:");
+                console.log(files.map((f) => f.fileUrl));
+                setImageUrl(files.map((f) => f.fileUrl)[0]);
+              }
+            }}
+          />
 
           <ButtonContainer>
             {/* <Button onClick={(e) => handleSubmit(e)}>SIGN UP</Button> */}

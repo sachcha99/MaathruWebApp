@@ -112,6 +112,25 @@ const Dashboard = () => {
     fetchData();
   };
 
+  const handleDownload = (imageUrl) => {
+    const uri = imageUrl.replace("data:image/png;base64,", "");
+    const byteString = window.atob(uri);
+    const ab = new ArrayBuffer(byteString.length);
+    const ia = new Uint8Array(ab);
+    for (let i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i);
+    }
+    const blob = new Blob([ab], { type: "image/png" });
+    const file = new File([blob], "image.png");
+    const link = document.createElement("a");
+    link.href = window.URL.createObjectURL(file);
+
+    link.download = "image.png";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <>
       <Container>
@@ -237,7 +256,11 @@ const Dashboard = () => {
                         }}
                       >
                         Download documents
-                        <IconButton aria-label="delete" size="large">
+                        <IconButton
+                          aria-label="delete"
+                          size="large"
+                          onClick={() => handleDownload(user?.report)}
+                        >
                           <DownloadForOfflineRoundedIcon
                             fontSize="inherit"
                             color="#407ebd"
