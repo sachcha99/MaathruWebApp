@@ -9,5 +9,7 @@ module.exports = function (){
     router.put('/update', UserController.updateUser);
     router.post('/validate', UserController.validateUser);
     router.post('/delete',UserController.deleteUser);
+    router.get('/type/:ss', UserController.getAllInstructors);
+    router.put('/update/:id', UserController.updateUserById);
     return router;
 }
