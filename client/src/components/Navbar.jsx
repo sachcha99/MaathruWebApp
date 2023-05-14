@@ -131,10 +131,10 @@ const Navbar = () => {
           <Link style={{ textDecoration: "none" }} to="/">
             <MenuItm>HOME</MenuItm>
           </Link>
-          <Link style={{ textDecoration: "none" }} to="/products">
+          <Link style={{ textDecoration: "none" }} to="/">
             <MenuItm>SERVICES</MenuItm>
           </Link>
-          <Link style={{ textDecoration: "none" }} to="/categories">
+          <Link style={{ textDecoration: "none" }} to="/">
             <MenuItm>ABOUT US</MenuItm>
           </Link>
           <Box

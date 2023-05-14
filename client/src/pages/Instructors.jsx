@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 import styled from "styled-components";
@@ -9,6 +9,7 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Grid from '@mui/material/Grid';
 import Avatar from '@mui/material/Avatar';
+import API from '../api';
 
 const Container = styled.div`
   width: 100vw;
@@ -125,6 +126,23 @@ background-color: #fff ;
 
 `;
 const Instructors = () => {
+    const [instructors, setInstructors] = useState([])
+    useEffect(() => {
+        const getInstructors = async () => {
+            try {
+                const result = await API.get(`user/type/instructor`)
+                console.log("result==============", result)
+                // if(result.length!==0){
+                setInstructors(result.data);
+                // }
+            } catch (err) {
+                console.log("err", err)
+            }
+        };
+        getInstructors();
+    }, []);
+
+
     return (
         <>
             <Container>
@@ -134,38 +152,18 @@ const Instructors = () => {
                         <Title>Instructors</Title>
 
                         <Grid style={{ paddingRight: '50px' }} container spacing={4}>
-                            <Grid item xs={4}>
+                            {instructors.length != 0 && instructors.map((item) => (<Grid item xs={4}>
                                 <FlexBox>
                                     <Avatar sx={{ width: 80, height: 80 }} alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
                                 </FlexBox>
-                                <InsTitle>Gaia Kodithuwakku</InsTitle>
+                                <InsTitle>{item.fullName && item.fullName}</InsTitle>
                                 <DescriptionField>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras finibus vestibulum felis, sit amet pretium risus rhoncus eu. Donec pellentesque fermentum sapien. Proin hendrerit commodo purus, vel sollicitudin velit lacinia in. Nullam sodales viverra neque, id consectetur mauris tincidunt eu. Praesent ut placerat dolor. Etiam sed elementum dolor. Ut iaculis massa at sem blandit mollis. In lacus est, elementum sed tortor sit amet, tincidunt convallis risus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed ut sodales sapien, sed pharetra purus. </DescriptionField>
+                                    {item.description ? item.description : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras finibus vestibulum felis, sit amet pretium risus rhoncus eu. Donec pellentesque fermentum sapien. Proin hendrerit commodo purus, vel sollicitudin velit lacinia in. Nullam sodales viverra neque, id consectetur mauris tincidunt eu. Praesent ut placerat dolor. Etiam sed elementum dolor. Ut iaculis massa at sem blandit mollis. In lacus est, elementum sed tortor sit amet, tincidunt convallis risus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed ut sodales sapien, sed pharetra purus."} </DescriptionField>
                                 <FlexBox>
                                     <Button>View Profile</Button>
                                 </FlexBox>
-                            </Grid>
-                            <Grid item xs={4}>
-                                <FlexBox>
-                                    <Avatar sx={{ width: 80, height: 80 }} alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                                </FlexBox>
-                                <InsTitle>Gaia Kodithuwakku</InsTitle>
-                                <DescriptionField>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras finibus vestibulum felis, sit amet pretium risus rhoncus eu. Donec pellentesque fermentum sapien. Proin hendrerit commodo purus, vel sollicitudin velit lacinia in. Nullam sodales viverra neque, id consectetur mauris tincidunt eu. Praesent ut placerat dolor. Etiam sed elementum dolor. Ut iaculis massa at sem blandit mollis. In lacus est, elementum sed tortor sit amet, tincidunt convallis risus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed ut sodales sapien, sed pharetra purus. </DescriptionField>
-                                <FlexBox>
-                                    <Button>View Profile</Button>
-                                </FlexBox>
-                            </Grid>
-                            <Grid item xs={4}>
-                                <FlexBox>
-                                    <Avatar sx={{ width: 80, height: 80 }} alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                                </FlexBox>
-                                <InsTitle>Gaia Kodithuwakku</InsTitle>
+                            </Grid>))}
 
-                                <DescriptionField>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras finibus vestibulum felis, sit amet pretium risus rhoncus eu. Donec pellentesque fermentum sapien. Proin hendrerit commodo purus, vel sollicitudin velit lacinia in. Nullam sodales viverra neque, id consectetur mauris tincidunt eu. Praesent ut placerat dolor. Etiam sed elementum dolor. Ut iaculis massa at sem blandit mollis. In lacus est, elementum sed tortor sit amet, tincidunt convallis risus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed ut sodales sapien, sed pharetra purus. </DescriptionField>
-                                <FlexBox>
-                                    <Button>View Profile</Button>
-                                </FlexBox>
-                            </Grid>
                         </Grid>
                     </Wrapper>
                 </div>

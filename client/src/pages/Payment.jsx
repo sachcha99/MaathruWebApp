@@ -32,6 +32,8 @@ import BadgeIcon from '@mui/icons-material/Badge';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import KeyIcon from '@mui/icons-material/Key';
 import PaymentsModal from '../components/PaymentsModal';
+import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux';
 
 
 const theme = createTheme();
@@ -350,6 +352,8 @@ const Payment = () => {
         return Math.random() > 0.7;
     }
 
+    const appointment = useSelector((state) => state.appointment)
+    console.log("appointment:::====", appointment)
     return (
         <>
             <Container>
@@ -359,41 +363,41 @@ const Payment = () => {
                         <Title>Payments</Title>
                         <Stack >
 
-                            <Grid container spacing={2}  sx={{ display:'flex', justifyContent:'space-evenly' }} >
+                            <Grid container spacing={2} sx={{ display: 'flex', justifyContent: 'space-evenly' }} >
                                 <Grid sx={{ marginRight: '25px', borderRadius: '10px' }} item xs={3}>
-                                    
 
-                                    <div style={{height:'300px', backgroundColor: '#fff', padding: '25px', marginBottom: '25px', borderRadius: '10px' }}>
+
+                                    <div style={{ height: '300px', backgroundColor: '#fff', padding: '25px', marginBottom: '25px', borderRadius: '10px' }}>
                                         <ReviewsTitle>Appointment Details</ReviewsTitle>
 
                                         <div style={{ fontSize: '15px', color: '#808080', paddingTop: '20px' }}>Session Date </div>
-                                        <div style={{ fontSize: '18px', color: '#000' }}><b>11/11/2023</b></div>
+                                        <div style={{ fontSize: '18px', color: '#000' }}><b>{appointment && appointment.value.data.appointmentDate}</b></div>
 
                                         <div style={{ fontSize: '15px', color: '#808080', paddingTop: '20px' }}>Session Period </div>
-                                        <div style={{ fontSize: '18px', color: '#000' }}><b>Morning</b></div>
+                                        <div style={{ fontSize: '18px', color: '#000' }}><b>{appointment && ((appointment.value.data.appointmentTime).split(" "))[1] == "AM" ? 'Morning' : 'Evening'}</b></div>
 
                                         <div style={{ fontSize: '15px', color: '#808080', paddingTop: '20px' }}>Session Time </div>
-                                        <div style={{ fontSize: '18px', color: '#000' }}><b>11:30AM</b></div>
+                                        <div style={{ fontSize: '18px', color: '#000' }}><b>{appointment && appointment.value.data.appointmentTime}</b></div>
 
                                         <div style={{ fontSize: '12px' }}>
                                         </div>
                                     </div>
                                 </Grid>
                                 <Grid sx={{ marginRight: '25px', borderRadius: '10px' }} item xs={3}>
-                                <div style={{ height:'300px',backgroundColor: '#fff', padding: '25px', marginBottom: '25px', borderRadius: '10px' }}>
+                                    <div style={{ height: '300px', backgroundColor: '#fff', padding: '25px', marginBottom: '25px', borderRadius: '10px' }}>
                                         <ReviewsTitle>Patient Details</ReviewsTitle>
 
                                         <div style={{ fontSize: '15px', color: '#808080', paddingTop: '20px' }}>Name </div>
-                                        <div style={{ fontSize: '18px', color: '#000' }}><b>11/11/2023</b></div>
+                                        <div style={{ fontSize: '18px', color: '#000' }}><b>{appointment && appointment.value.data.patientFullName}</b></div>
 
                                         <div style={{ fontSize: '15px', color: '#808080', paddingTop: '20px' }}>Mobile No </div>
-                                        <div style={{ fontSize: '18px', color: '#000' }}><b>Morning</b></div>
+                                        <div style={{ fontSize: '18px', color: '#000' }}><b>{appointment && appointment.value.data.patientMobileNo}</b></div>
 
                                         <div style={{ fontSize: '15px', color: '#808080', paddingTop: '20px' }}>Email</div>
-                                        <div style={{ fontSize: '18px', color: '#000' }}><b>11:30AM</b></div>
+                                        <div style={{ fontSize: '18px', color: '#000' }}><b>{appointment && appointment.value.data.patientEmail}</b></div>
 
                                         <div style={{ fontSize: '15px', color: '#808080', paddingTop: '20px' }}>Pregnancy Date</div>
-                                        <div style={{ fontSize: '18px', color: '#000' }}><b>11/11/2023</b></div>
+                                        <div style={{ fontSize: '18px', color: '#000' }}><b>{appointment && appointment.value.data.patientPregnancyDate}</b></div>
 
                                         <div style={{ fontSize: '12px' }}>
                                         </div>
@@ -402,9 +406,9 @@ const Payment = () => {
 
                                 </Grid>
                                 <Grid sx={{ borderRadius: '10px' }} item xs={3}>
-                                    
 
-                                    <div style={{ height:'300px',backgroundColor: '#fff', padding: '25px', marginBottom: '25px', borderRadius: '10px' }}>
+
+                                    <div style={{ height: '300px', backgroundColor: '#fff', padding: '25px', marginBottom: '25px', borderRadius: '10px' }}>
                                         <ReviewsTitle>Payment Details</ReviewsTitle>
                                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                                             <div style={{ fontSize: '15px', fontWeight: '500', color: '#3d3d3d', paddingTop: '20px' }}>Doctor Fee </div>
@@ -426,7 +430,7 @@ const Payment = () => {
                                             <div style={{ fontSize: '15px', color: '#3d3d3d', fontWeight: '500', paddingTop: '20px' }}>Rs. 100</div>
                                         </div>
 
-                                        <Divider style={{ marginTop: '25px' }}/>
+                                        <Divider style={{ marginTop: '25px' }} />
 
                                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                                             <div style={{ fontSize: '15px', fontWeight: '700', color: '#956C6E', paddingTop: '20px' }}>Total Fee </div>
@@ -443,9 +447,9 @@ const Payment = () => {
                             <ButtonContainer>
 
                                 <Button>
-                                <Image src="https://i.ibb.co/YB3xS2T/Pay-Pal-svg.png" />
+                                    <Image src="https://i.ibb.co/YB3xS2T/Pay-Pal-svg.png" />
                                 </Button>
-                                                                <PaymentsModal/>
+                                <PaymentsModal disabled={!appointment.value.data.patientFullName && !appointment.value.data.patientMobileNo && !appointment.value.data.patientEmail && !appointment.value.data.patientBirthDate && !appointment.value.data.patientPregnancyDate} />
 
                             </ButtonContainer>
 

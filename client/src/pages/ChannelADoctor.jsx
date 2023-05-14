@@ -246,7 +246,7 @@ const ChannelADoctor = () => {
                                     </div>
 
                                 </SimpleFlexBox>
-                                <Button onClick={() => {  dispatch(newAppointment({ 'doctorName': "Dr.Nalinda Rodrigo",'address': "Colombo 03",'experience': "7 years",'specialization': "VOG"})); navigate('/doctor') }}>View Profile</Button>
+                                <Button onClick={() => { dispatch(newAppointment({ 'doctorName': "Dr.Nalinda Rodrigo", 'specialization': "VOG" })); navigate('/doctor') }}>View Profile</Button>
 
                             </FlexBox>
                             <Grid container spacing={0}>
@@ -298,7 +298,7 @@ const ChannelADoctor = () => {
                                     </div>
 
                                 </SimpleFlexBox>
-                                <Button onClick={() => {  dispatch(newAppointment({ 'doctorName': "Dr. Roshan Jayasinghe",'address': "Malabe",'experience': "11 years",'specialization': "VOG"})); navigate('/doctor') }}>View Profile</Button>
+                                <Button onClick={() => { dispatch(newAppointment({ 'doctorName': "Dr. Roshan Jayasinghe", 'address': "Malabe", 'experience': "11 years", 'specialization': "VOG" })); navigate('/doctor') }}>View Profile</Button>
 
                             </FlexBox>
                             <Grid container spacing={0}>
@@ -350,7 +350,7 @@ const ChannelADoctor = () => {
                                     </div>
 
                                 </SimpleFlexBox>
-                                <Button onClick={() => {  dispatch(newAppointment({ 'doctorName': "Dr.Sunil Perera",'address': "Nugegoda",'experience': "10 years",'specialization': "VOG"})); navigate('/doctor') }}>View Profile</Button>
+                                <Button onClick={() => { dispatch(newAppointment({ 'doctorName': "Dr.Sunil Perera", 'address': "Nugegoda", 'experience': "10 years", 'specialization': "VOG" })); navigate('/doctor') }}>View Profile</Button>
 
                             </FlexBox>
                             <Grid container spacing={0}>
@@ -384,7 +384,7 @@ const ChannelADoctor = () => {
                         </Stack>
 
 
-                        
+
                     </Wrapper>
                 </div>
                 <Footer />

@@ -103,14 +103,14 @@ const ReadingMaterials = () => {
                     <Wrapper>
                         <Box sx={{ width: '100%' }}>
                             <Tabs centered indicatorColor="secondary" textColor="inherit" value={value} onChange={handleChange} aria-label="nav tabs example">
-                                <Tab label="Magazines" {...a11yProps(0)}  />
+                                <Tab label="Magazines" {...a11yProps(0)} />
                                 <Tab label="Audio Books" {...a11yProps(1)} />
                             </Tabs>
                             <TabPanel value={value} index={0}>
-                               <Magazines/>
+                                <Magazines />
                             </TabPanel>
                             <TabPanel value={value} index={1}>
-                                <AudioBooks/>
+                                <AudioBooks />
                             </TabPanel>
                         </Box>
                     </Wrapper>

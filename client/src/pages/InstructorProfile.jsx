@@ -380,7 +380,7 @@ const InstructorProfile = () => {
                                         <div style={{ fontSize: '20px', color: '#fff', padding: '10px', backgroundColor: '#956C6E', height: '30px', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
                                             <div><b>My Portfolio</b></div>
                                         </div>
-                                        <div style={{width: "100%"}}>
+                                        <div style={{ width: "100%" }}>
                                             <ReactPlayer height={"250px"} width={"800px"} url={userInfoDetails?.portfolio} controls={true} />
                                         </div>
                                     </div>
@@ -392,7 +392,7 @@ const InstructorProfile = () => {
 
                             <Grid container spacing={2}>
                                 <Grid sx={{ marginRight: '25px', borderRadius: '10px' }} item xs={4}>
-                                    <div style={{ height: '220px',backgroundColor: '#fff', marginBottom: '25px', padding: '15px', borderRadius: '10px', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
+                                    <div style={{ height: '220px', backgroundColor: '#fff', marginBottom: '25px', padding: '15px', borderRadius: '10px', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
 
                                         <DescTitle>Description</DescTitle>
                                         <div style={{ fontSize: '12px' }}>
@@ -403,7 +403,7 @@ const InstructorProfile = () => {
                                 <Grid sx={{ marginLeft: '25px', borderRadius: '10px' }} item xs={7}>
                                     <div style={{ height: '250px', backgroundColor: '#fff', marginBottom: '25px', borderRadius: '10px', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
 
-                                        <div style={{ height:'100%',display: 'flex',flexDirection:'column' ,justifyContent: 'center', alignItems: 'center' }}>
+                                        <div style={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                                             <FeedbackTitle>Any Experience with Gaia</FeedbackTitle>
                                             <Button>Leave a Feedback</Button>
                                             <div style={{ fontSize: '14px' }}>

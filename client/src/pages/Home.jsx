@@ -17,9 +17,9 @@ const Home = () => {
     <>
       <Container>
         <Navbar />
-        <Slider/>
-        <CardView/>
-        <Journey/>
+        <Slider />
+        <CardView />
+        <Journey />
         <Footer />
       </Container>
 
