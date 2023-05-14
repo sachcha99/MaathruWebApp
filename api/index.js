@@ -6,6 +6,8 @@ const bodyParser = require("body-parser");
 const connectDB = require("./src/config/database");
 const UserAPI = require("./src/api/user.api")
 const videoApI = require("./src/api/video.api")
+const PaymentAPI = require('./src/api/payment.api');
+const AppointmentAPI = require('./src/api/appointment.api');
 
 const port = process.env.PORT || 5000;
 const app = express();
@@ -24,6 +26,8 @@ app.get("/", (req, res) => {
 
 app.use("/user", UserAPI());
 app.use("/video", videoApI);
+app.use("/payment", PaymentAPI());
+app.use("/appointment", AppointmentAPI());
 
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`);

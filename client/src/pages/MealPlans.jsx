@@ -76,7 +76,7 @@ padding:8px 0;
 
 `;
 
-const MealsTitle= styled.div`
+const MealsTitle = styled.div`
 font-weight: 700;
 font-size:20px;
 color: #956C6E;
@@ -95,167 +95,167 @@ const MealPlans = () => {
                     <Wrapper>
                         <Title>Meal Plans</Title>
                         <Stack >
-                            <Grid  container spacing={0}>
+                            <Grid container spacing={0}>
                                 <Grid item xs={3}>
                                     <DayField>Day 1</DayField>
                                 </Grid>
-                                <Grid  style={{borderLeft:"1px solid #956C6E", paddingBlock: '15px'}} item xs={3}>
-                                <MealsTitle>Breakfast</MealsTitle>
-                                <MealsField>Food - Greek yogurt with berries</MealsField>
-                                <MealsField>Chia seeds</MealsField>
-                                <MealsField>Snack - Energy balls</MealsField>
+                                <Grid style={{ borderLeft: "1px solid #956C6E", paddingBlock: '15px' }} item xs={3}>
+                                    <MealsTitle>Breakfast</MealsTitle>
+                                    <MealsField>Food - Greek yogurt with berries</MealsField>
+                                    <MealsField>Chia seeds</MealsField>
+                                    <MealsField>Snack - Energy balls</MealsField>
 
                                 </Grid>
-                                <Grid  style={{borderLeft:"1px solid #956C6E"}}  item xs={3}>
-                                <MealsTitle>Lunch</MealsTitle>
-                                <MealsField>Food - Bean burritos</MealsField>                               
+                                <Grid style={{ borderLeft: "1px solid #956C6E" }} item xs={3}>
+                                    <MealsTitle>Lunch</MealsTitle>
+                                    <MealsField>Food - Bean burritos</MealsField>
                                 </Grid>
-                                <Grid  style={{borderLeft:"1px solid #956C6E"}} item xs={3}>
-                                <MealsTitle>Dinner</MealsTitle>
-                                <MealsField>Food  - Shredded chicken sandwiches</MealsField>                               
+                                <Grid style={{ borderLeft: "1px solid #956C6E" }} item xs={3}>
+                                    <MealsTitle>Dinner</MealsTitle>
+                                    <MealsField>Food  - Shredded chicken sandwiches</MealsField>
                                 </Grid>
                             </Grid>
                         </Stack>
 
                         <Stack >
-                            <Grid  container spacing={0}>
+                            <Grid container spacing={0}>
                                 <Grid item xs={3}>
                                     <DayField>Day 2</DayField>
                                 </Grid>
-                                <Grid  style={{borderLeft:"1px solid #956C6E", paddingBlock: '15px'}} item xs={3}>
-                                <MealsTitle>Breakfast</MealsTitle>
-                                <MealsField>Food - 2 eggs with whole wheat toas</MealsField>
+                                <Grid style={{ borderLeft: "1px solid #956C6E", paddingBlock: '15px' }} item xs={3}>
+                                    <MealsTitle>Breakfast</MealsTitle>
+                                    <MealsField>Food - 2 eggs with whole wheat toas</MealsField>
 
                                 </Grid>
-                                <Grid  style={{borderLeft:"1px solid #956C6E"}}  item xs={3}>
-                                <MealsTitle>Lunch</MealsTitle>
-                                <MealsField>Food - Chicken salad wrap</MealsField>
-                                <MealsField>Snack - slices of cheese</MealsField>                                
+                                <Grid style={{ borderLeft: "1px solid #956C6E" }} item xs={3}>
+                                    <MealsTitle>Lunch</MealsTitle>
+                                    <MealsField>Food - Chicken salad wrap</MealsField>
+                                    <MealsField>Snack - slices of cheese</MealsField>
                                 </Grid>
-                                <Grid  style={{borderLeft:"1px solid #956C6E"}} item xs={3}>
-                                <MealsTitle>Dinner</MealsTitle>
-                                <MealsField>Food - Veggie, chicken, or turkey tacos</MealsField>                         
+                                <Grid style={{ borderLeft: "1px solid #956C6E" }} item xs={3}>
+                                    <MealsTitle>Dinner</MealsTitle>
+                                    <MealsField>Food - Veggie, chicken, or turkey tacos</MealsField>
                                 </Grid>
                             </Grid>
                         </Stack>
 
 
                         <Stack >
-                            <Grid  container spacing={0}>
+                            <Grid container spacing={0}>
                                 <Grid item xs={3}>
                                     <DayField>Day 3</DayField>
                                 </Grid>
-                                <Grid  style={{borderLeft:"1px solid #956C6E", paddingBlock: '15px'}} item xs={3}>
-                                <MealsTitle>Breakfast</MealsTitle>
-                                <MealsField>Steel - cut oats with berries and walnuts</MealsField>
+                                <Grid style={{ borderLeft: "1px solid #956C6E", paddingBlock: '15px' }} item xs={3}>
+                                    <MealsTitle>Breakfast</MealsTitle>
+                                    <MealsField>Steel - cut oats with berries and walnuts</MealsField>
 
                                 </Grid>
-                                <Grid  style={{borderLeft:"1px solid #956C6E"}}  item xs={3}>
-                                <MealsTitle>Lunch</MealsTitle>
-                                <MealsField>Food - Avocado toast with sliced cheese</MealsField>
-                                <MealsField>and fruit</MealsField>
-                                <MealsField>Snack - Cut vegetables with dressing</MealsField>                                
+                                <Grid style={{ borderLeft: "1px solid #956C6E" }} item xs={3}>
+                                    <MealsTitle>Lunch</MealsTitle>
+                                    <MealsField>Food - Avocado toast with sliced cheese</MealsField>
+                                    <MealsField>and fruit</MealsField>
+                                    <MealsField>Snack - Cut vegetables with dressing</MealsField>
                                 </Grid>
-                                <Grid  style={{borderLeft:"1px solid #956C6E"}} item xs={3}>
-                                <MealsTitle>Dinner</MealsTitle>
-                                <MealsField>Food - Vegetable, tofu, chicken, or </MealsField>  
-                                <MealsField>shrimp stir fry with rice</MealsField>                             
+                                <Grid style={{ borderLeft: "1px solid #956C6E" }} item xs={3}>
+                                    <MealsTitle>Dinner</MealsTitle>
+                                    <MealsField>Food - Vegetable, tofu, chicken, or </MealsField>
+                                    <MealsField>shrimp stir fry with rice</MealsField>
                                 </Grid>
                             </Grid>
                         </Stack>
 
 
                         <Stack >
-                            <Grid  container spacing={0}>
+                            <Grid container spacing={0}>
                                 <Grid item xs={3}>
                                     <DayField>Day 4</DayField>
                                 </Grid>
-                                <Grid  style={{borderLeft:"1px solid #956C6E", paddingBlock: '15px'}} item xs={3}>
-                                <MealsTitle>Breakfast</MealsTitle>
-                                <MealsField>Food - Egg quiche with a side </MealsField>
-                                <MealsField>of fruit</MealsField>
+                                <Grid style={{ borderLeft: "1px solid #956C6E", paddingBlock: '15px' }} item xs={3}>
+                                    <MealsTitle>Breakfast</MealsTitle>
+                                    <MealsField>Food - Egg quiche with a side </MealsField>
+                                    <MealsField>of fruit</MealsField>
 
                                 </Grid>
-                                <Grid  style={{borderLeft:"1px solid #956C6E"}}  item xs={3}>
-                                <MealsTitle>Lunch</MealsTitle>
-                                <MealsField>Food - Salad with sliced chicken </MealsField>
-                                <MealsField>or tofu</MealsField>
-                                <MealsField>Snack - Nuts and fruit</MealsField>                                
+                                <Grid style={{ borderLeft: "1px solid #956C6E" }} item xs={3}>
+                                    <MealsTitle>Lunch</MealsTitle>
+                                    <MealsField>Food - Salad with sliced chicken </MealsField>
+                                    <MealsField>or tofu</MealsField>
+                                    <MealsField>Snack - Nuts and fruit</MealsField>
                                 </Grid>
-                                <Grid  style={{borderLeft:"1px solid #956C6E"}} item xs={3}>
-                                <MealsTitle>Dinner</MealsTitle>
-                                <MealsField>Food - Bean burrito bowl</MealsField>                                
+                                <Grid style={{ borderLeft: "1px solid #956C6E" }} item xs={3}>
+                                    <MealsTitle>Dinner</MealsTitle>
+                                    <MealsField>Food - Bean burrito bowl</MealsField>
                                 </Grid>
                             </Grid>
                         </Stack>
 
 
                         <Stack >
-                            <Grid  container spacing={0}>
+                            <Grid container spacing={0}>
                                 <Grid item xs={3}>
                                     <DayField>Day 5</DayField>
                                 </Grid>
-                                <Grid  style={{borderLeft:"1px solid #956C6E", paddingBlock: '15px'}} item xs={3}>
-                                <MealsTitle>Breakfast</MealsTitle>
-                                <MealsField>Food - Bagel sandwich</MealsField>
-                                <MealsField>Snack - Fruit protein smoothie</MealsField>
+                                <Grid style={{ borderLeft: "1px solid #956C6E", paddingBlock: '15px' }} item xs={3}>
+                                    <MealsTitle>Breakfast</MealsTitle>
+                                    <MealsField>Food - Bagel sandwich</MealsField>
+                                    <MealsField>Snack - Fruit protein smoothie</MealsField>
 
                                 </Grid>
-                                <Grid  style={{borderLeft:"1px solid #956C6E"}}  item xs={3}>
-                                <MealsTitle>Lunch</MealsTitle>
-                                <MealsField>Food - Tuna salad sandwich</MealsField>                                
+                                <Grid style={{ borderLeft: "1px solid #956C6E" }} item xs={3}>
+                                    <MealsTitle>Lunch</MealsTitle>
+                                    <MealsField>Food - Tuna salad sandwich</MealsField>
                                 </Grid>
-                                <Grid  style={{borderLeft:"1px solid #956C6E"}} item xs={3}>
-                                <MealsTitle>Dinner</MealsTitle>
-                                <MealsField>Food - Tortellini with chicken </MealsField>
-                                <MealsField>and vegetables</MealsField>                            
+                                <Grid style={{ borderLeft: "1px solid #956C6E" }} item xs={3}>
+                                    <MealsTitle>Dinner</MealsTitle>
+                                    <MealsField>Food - Tortellini with chicken </MealsField>
+                                    <MealsField>and vegetables</MealsField>
                                 </Grid>
                             </Grid>
                         </Stack>
 
 
                         <Stack >
-                            <Grid  container spacing={0}>
+                            <Grid container spacing={0}>
                                 <Grid item xs={3}>
                                     <DayField>Day 6</DayField>
                                 </Grid>
-                                <Grid  style={{borderLeft:"1px solid #956C6E", paddingBlock: '15px'}} item xs={3}>
-                                <MealsTitle>Breakfast</MealsTitle>
-                                <MealsField>Food - Granola with milk</MealsField>
-                                <MealsField>Snack - Tex mex chicken quinoa</MealsField>
+                                <Grid style={{ borderLeft: "1px solid #956C6E", paddingBlock: '15px' }} item xs={3}>
+                                    <MealsTitle>Breakfast</MealsTitle>
+                                    <MealsField>Food - Granola with milk</MealsField>
+                                    <MealsField>Snack - Tex mex chicken quinoa</MealsField>
 
                                 </Grid>
-                                <Grid  style={{borderLeft:"1px solid #956C6E"}}  item xs={3}>
-                                <MealsTitle>Lunch</MealsTitle>
-                                <MealsField>Food - Apple with peanut butter</MealsField>                               
+                                <Grid style={{ borderLeft: "1px solid #956C6E" }} item xs={3}>
+                                    <MealsTitle>Lunch</MealsTitle>
+                                    <MealsField>Food - Apple with peanut butter</MealsField>
                                 </Grid>
-                                <Grid  style={{borderLeft:"1px solid #956C6E"}} item xs={3}>
-                                <MealsTitle>Dinner</MealsTitle>
-                                <MealsField>Food - Fish and vegetable side</MealsField>                            
+                                <Grid style={{ borderLeft: "1px solid #956C6E" }} item xs={3}>
+                                    <MealsTitle>Dinner</MealsTitle>
+                                    <MealsField>Food - Fish and vegetable side</MealsField>
                                 </Grid>
                             </Grid>
                         </Stack>
 
 
                         <Stack >
-                            <Grid  container spacing={0}>
+                            <Grid container spacing={0}>
                                 <Grid item xs={3}>
                                     <DayField>Day 7</DayField>
                                 </Grid>
-                                <Grid  style={{borderLeft:"1px solid #956C6E", paddingBlock: '15px'}} item xs={3}>
-                                <MealsTitle>Breakfast</MealsTitle>
-                                <MealsField>Food -  Fruit protein smoothie</MealsField>
+                                <Grid style={{ borderLeft: "1px solid #956C6E", paddingBlock: '15px' }} item xs={3}>
+                                    <MealsTitle>Breakfast</MealsTitle>
+                                    <MealsField>Food -  Fruit protein smoothie</MealsField>
 
                                 </Grid>
-                                <Grid  style={{borderLeft:"1px solid #956C6E"}}  item xs={3}>
-                                <MealsTitle>Lunch</MealsTitle>
-                                <MealsField>Food -  Vegetable salad and brown rice</MealsField>
-                                <MealsField>Snack - veggies with hummus</MealsField>                               
+                                <Grid style={{ borderLeft: "1px solid #956C6E" }} item xs={3}>
+                                    <MealsTitle>Lunch</MealsTitle>
+                                    <MealsField>Food -  Vegetable salad and brown rice</MealsField>
+                                    <MealsField>Snack - veggies with hummus</MealsField>
                                 </Grid>
-                                <Grid  style={{borderLeft:"1px solid #956C6E"}} item xs={3}>
-                                <MealsTitle>Dinner</MealsTitle>
-                                <MealsField>Food - Pork chops and sweet potatoes</MealsField>
-                                <MealsField>with soup</MealsField>                                 
+                                <Grid style={{ borderLeft: "1px solid #956C6E" }} item xs={3}>
+                                    <MealsTitle>Dinner</MealsTitle>
+                                    <MealsField>Food - Pork chops and sweet potatoes</MealsField>
+                                    <MealsField>with soup</MealsField>
                                 </Grid>
                             </Grid>
                         </Stack>

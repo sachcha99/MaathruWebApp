@@ -17,7 +17,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import Navbar from "../components/Navbar";
 // import API from './../api'
 const Alert = React.forwardRef(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
 const MainContainer = styled.div`
@@ -153,65 +153,65 @@ const FlexBox = styled.div`
 `;
 
 const Register = () => {
-  const [userDetails, setUserDetails] = useState({ fullName: "", email: "", username: "", userType: "", password: "" })
-  const [openSnackbar, setOpenSnackbar] = useState(false);
-  const [snackbarType, setSnackbarType] = useState("");
-  const [snackbarMsg, setSnackbarMsg] = useState("");
+    const [userDetails, setUserDetails] = useState({ fullName: "", email: "", username: "", userType: "", password: "" })
+    const [openSnackbar, setOpenSnackbar] = useState(false);
+    const [snackbarType, setSnackbarType] = useState("");
+    const [snackbarMsg, setSnackbarMsg] = useState("");
 
-  const handleOpenSnackbar = () => {
-    setOpenSnackbar(true);
-  };
+    const handleOpenSnackbar = () => {
+        setOpenSnackbar(true);
+    };
 
-  const handleCloseSnackbar = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
+    const handleCloseSnackbar = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpenSnackbar(false);
+    };
+
+    const isValidEmail = (email) => {
+        return /\S+@\S+\.\S+/.test(email);
     }
 
-    setOpenSnackbar(false);
-  };
+    //   const handleSubmit = async (event) => {
+    //     event.preventDefault();
 
-  const isValidEmail = (email) => {
-    return /\S+@\S+\.\S+/.test(email);
-  }
+    //     if (userDetails.fullName !== "" && userDetails.email !== "" && userDetails.password !== "" && userDetails.userType !== "" && userDetails.username !== "") {
 
-//   const handleSubmit = async (event) => {
-//     event.preventDefault();
-
-//     if (userDetails.fullName !== "" && userDetails.email !== "" && userDetails.password !== "" && userDetails.userType !== "" && userDetails.username !== "") {
-
-//       if (!isValidEmail(userDetails.email)) {
-//         setSnackbarType("error")
-//         setSnackbarMsg("Please enter a valid email")
-//         handleOpenSnackbar()
-//       } else {
-//         console.log("userDetails::", userDetails)
-//         try {
-//           const result = await API.post('user/create', userDetails)
-//           console.log("result",result)
-//           setSnackbarType("success")
-//           setSnackbarMsg("User Created Successfully")
-//           handleOpenSnackbar()
-//         } catch (error) {
-//           setSnackbarType("error")
-//           setSnackbarMsg(error.response.data.message)
-//           handleOpenSnackbar()
-//         }
-//       }
+    //       if (!isValidEmail(userDetails.email)) {
+    //         setSnackbarType("error")
+    //         setSnackbarMsg("Please enter a valid email")
+    //         handleOpenSnackbar()
+    //       } else {
+    //         console.log("userDetails::", userDetails)
+    //         try {
+    //           const result = await API.post('user/create', userDetails)
+    //           console.log("result",result)
+    //           setSnackbarType("success")
+    //           setSnackbarMsg("User Created Successfully")
+    //           handleOpenSnackbar()
+    //         } catch (error) {
+    //           setSnackbarType("error")
+    //           setSnackbarMsg(error.response.data.message)
+    //           handleOpenSnackbar()
+    //         }
+    //       }
 
 
-//     }
-//     else {
-//       setSnackbarType("error")
-//       setSnackbarMsg("Please fill all the fields")
-//       handleOpenSnackbar()
-//     }
+    //     }
+    //     else {
+    //       setSnackbarType("error")
+    //       setSnackbarMsg("Please fill all the fields")
+    //       handleOpenSnackbar()
+    //     }
 
-//   };
+    //   };
 
 
     return (
         <MainContainer>
-            <Navbar/>
+            <Navbar />
             <Container>
                 <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
                     <Alert onClose={handleCloseSnackbar} severity={snackbarType} sx={{ width: '100%' }}>

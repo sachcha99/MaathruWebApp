@@ -41,7 +41,7 @@ const MainContainer = styled.div`
 
 const Container = styled.div`
   width: 100vw;
-  height: 150vh;
+  height: 230vh;
   background-color: #ffe6e6;
   background-size: cover;
   display: flex;
@@ -316,6 +316,7 @@ const RegisterInstructor = () => {
                 portfolio: "",
                 report: "",
               });
+              setImageUrl();
               setConfirmPassword("");
               setSelectedFile(null);
               setPreview(null);
@@ -600,6 +601,17 @@ const RegisterInstructor = () => {
               },
             }}
           />
+          <Typography
+            sx={{
+              marginTop: "10px",
+              marginBottom: "2px",
+              fontWeight: "bold",
+              fontSize: "20px",
+              textAlign: "left",
+            }}
+          >
+            Portfolio
+          </Typography>
           {preview ? (
             <Box sx={{ position: "relative", marginTop: "8px" }}>
               <ReactPlayer
@@ -626,7 +638,7 @@ const RegisterInstructor = () => {
               <IconButton aria-label="upload">
                 <AddIcon />
               </IconButton>
-              <Typography>Add a Photo or Video</Typography>
+              <Typography>Add a Video</Typography>
             </FileWrapper>
           )}
           <Typography

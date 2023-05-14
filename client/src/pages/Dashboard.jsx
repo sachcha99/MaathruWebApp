@@ -11,6 +11,7 @@ import CallIcon from "@mui/icons-material/Call";
 import HomeIcon from "@mui/icons-material/Home";
 import { useState } from "react";
 import api from "../api";
+import { saveAs } from 'file-saver';
 
 const Container = styled.div`
   width: 100vw;
@@ -113,22 +114,7 @@ const Dashboard = () => {
   };
 
   const handleDownload = (imageUrl) => {
-    const uri = imageUrl.replace("data:image/png;base64,", "");
-    const byteString = window.atob(uri);
-    const ab = new ArrayBuffer(byteString.length);
-    const ia = new Uint8Array(ab);
-    for (let i = 0; i < byteString.length; i++) {
-      ia[i] = byteString.charCodeAt(i);
-    }
-    const blob = new Blob([ab], { type: "image/png" });
-    const file = new File([blob], "image.png");
-    const link = document.createElement("a");
-    link.href = window.URL.createObjectURL(file);
-
-    link.download = "image.png";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    saveAs(imageUrl);
   };
 
   return (
@@ -139,12 +125,9 @@ const Dashboard = () => {
           <Wrapper>
             <Box>
               <Typography variant="h4" component="div" gutterBottom>
-                Welcome to your Dashboard!
+                Admin Dashboard!
               </Typography>
-              <Typography variant="h6" component="div" gutterBottom>
-                Here you can view your profile, edit your profile, and view your
-                students.
-              </Typography>
+
               {data?.length > 0 ? (
                 data?.map((user) => (
                   <Box
@@ -268,7 +251,7 @@ const Dashboard = () => {
                         </IconButton>
                       </Box>
                       {user.isVerified === "approved" ||
-                      user.isVerified === "rejected" ? (
+                        user.isVerified === "rejected" ? (
                         <StatusButton>
                           {user.isVerified === "approved"
                             ? "Approved"

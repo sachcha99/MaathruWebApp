@@ -263,11 +263,11 @@ const RegisterType = () => {
       <Navbar />
       <Container>
         <Wrapper>
-        <Title>WHY ARE YOU HERE?</Title>
+          <Title>WHY ARE YOU HERE?</Title>
 
           <CardContainer>
             <CardBox>
-            <Card onClick={()=>{navigate("/registerMother")}}>
+              <Card onClick={() => { navigate("/registerMother") }}>
                 <ImgContainer>
                   <Image src="https://i.ibb.co/3SnYw9B/Mask-Group-8.png" />
                 </ImgContainer>
@@ -275,7 +275,7 @@ const RegisterType = () => {
               </Card>
             </CardBox>
             <CardBox>
-              <Card onClick={()=>{navigate("/registerInstructor")}}>
+              <Card onClick={() => { navigate("/registerInstructor") }}>
                 <ImgContainer>
                   <Image src="https://i.ibb.co/YfWWvJj/Mask-Group-7.png" />
                 </ImgContainer>

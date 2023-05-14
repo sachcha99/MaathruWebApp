@@ -124,7 +124,7 @@ padding:30px 0;
                     </Card>
                 </CardBox>
                 <CardBox>
-                <Card onClick={() => { navigate('/reading') }}>
+                    <Card onClick={() => { navigate('/reading') }}>
                         <ImgContainer>
                             <Image src="https://i.ibb.co/XVDv8QP/Mask-Group-6.png" />
                         </ImgContainer>

@@ -190,20 +190,43 @@ const Login = () => {
         try {
           const result = await api.post('user/validate', userDetails)
           console.log("result", result)
-          setSnackbarType("success")
-          setSnackbarMsg("Logged In Successfully")
-          handleOpenSnackbar()
-          let decodedToken = jwt_decode(result.data.token)
-          localStorage.setItem('token', result.data.token)
-          localStorage.setItem('userInfo', JSON.stringify(result.data.userDetails))
-          dispatch(login({ 'fullName': decodedToken.fullName, 'email': decodedToken.email }))
-          dispatch(userInfo(result.data.userDetails))
-          // if (result.data.userDetails.userType === "buyer") {
-          navigate('/')
-          // }
-          // if (result.data.userDetails.userType === "seller") {
-          //   navigate('/sellerDashboard')
-          // }
+
+          if (result.data.userDetails.userType === "instructor") {
+            if (result.data.userDetails.isVerified && result.data.userDetails.isVerified == "approved") {
+              setSnackbarType("success")
+              setSnackbarMsg("Logged In Successfully")
+              handleOpenSnackbar()
+              let decodedToken = jwt_decode(result.data.token)
+              localStorage.setItem('token', result.data.token)
+              localStorage.setItem('userInfo', JSON.stringify(result.data.userDetails))
+              dispatch(login({ 'fullName': decodedToken.fullName, 'email': decodedToken.email }))
+              dispatch(userInfo(result.data.userDetails))
+              navigate('/')
+
+            }
+            else if (result.data.userDetails.isVerified && result.data.userDetails.isVerified == "rejected") {
+              setSnackbarType("error")
+              setSnackbarMsg("Your account request has been rejected by the admin")
+              handleOpenSnackbar()
+
+            }
+            else {
+              setSnackbarType("warning")
+              setSnackbarMsg("Your account request is still processing")
+              handleOpenSnackbar()
+            }
+          }
+          else {
+            setSnackbarType("success")
+            setSnackbarMsg("Logged In Successfully")
+            handleOpenSnackbar()
+            let decodedToken = jwt_decode(result.data.token)
+            localStorage.setItem('token', result.data.token)
+            localStorage.setItem('userInfo', JSON.stringify(result.data.userDetails))
+            dispatch(login({ 'fullName': decodedToken.fullName, 'email': decodedToken.email }))
+            dispatch(userInfo(result.data.userDetails))
+            navigate('/')
+          }
 
         } catch (error) {
           console.log("error", error)

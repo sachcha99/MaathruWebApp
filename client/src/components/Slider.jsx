@@ -125,7 +125,7 @@ const Slider = () => {
               <Title>{item.title}</Title>
               <Desc>{item.desc}</Desc>
               <Button2>START JOURNEY</Button2>
-              {!token && <Button1 onClick={()=>{navigate('/login')}}>SIGN IN</Button1>}
+              {!token && <Button1 onClick={() => { navigate('/login') }}>SIGN IN</Button1>}
             </InfoContainer>
           </Slide>
         ))}

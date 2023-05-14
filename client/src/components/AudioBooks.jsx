@@ -47,9 +47,9 @@ const AudioBooks = () => {
     return (
         <Grid container spacing={2}>
             <Grid sx={{ cursor: 'pointer' }} onClick={() => { window.open('https://www.pnmag.com/', '_blank'); }} item xs={3}>
-                <Image src="https://i.ibb.co/1q2KZBr/51ame-O9tw-BL-SL500.jpg"  />
+                <Image src="https://i.ibb.co/1q2KZBr/51ame-O9tw-BL-SL500.jpg" />
             </Grid>
-            <Grid sx={{ cursor: 'pointer', backgroundColor:'#fff',borderRadius:'10px' }} onClick={() => { window.open('https://www.fitpregnancy.com/', '_blank'); }} item xs={9}>
+            <Grid sx={{ cursor: 'pointer', backgroundColor: '#fff', borderRadius: '10px' }} onClick={() => { window.open('https://www.fitpregnancy.com/', '_blank'); }} item xs={9}>
                 <StyledAudioPlayer
                     src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
                     //   autoPlay
@@ -63,10 +63,10 @@ const AudioBooks = () => {
                         <CardImage src="https://i.ibb.co/9V8fYFx/41-B9-Gjp3ea-L-SL500.jpg" />
                     </Grid>
                     <Grid sx={{ cursor: 'pointer' }} onClick={() => { window.open('https://www.whattoexpect.com/pregnancy/', '_blank'); }} item xs={2}>
-                        <CardImage src="https://i.ibb.co/G5788YJ/41-Ab-MFY2y0-L-SL500.jpg"  />
+                        <CardImage src="https://i.ibb.co/G5788YJ/41-Ab-MFY2y0-L-SL500.jpg" />
                     </Grid>
                     <Grid sx={{ cursor: 'pointer' }} onClick={() => { window.open('https://www.popsugar.com/family/pregnancy', '_blank'); }} item xs={2}>
-                        <CardImage src="https://i.ibb.co/JCGyRMm/418ekjfs-HZL-SL500.jpg"  />
+                        <CardImage src="https://i.ibb.co/JCGyRMm/418ekjfs-HZL-SL500.jpg" />
                     </Grid>
                     <Grid sx={{ cursor: 'pointer' }} onClick={() => { window.open('https://www.babycenter.com/pregnancy', '_blank'); }} item xs={2}>
                         <CardImage src="https://i.ibb.co/DptZPfs/411-M0c-o-FBL-SL500.jpg" />

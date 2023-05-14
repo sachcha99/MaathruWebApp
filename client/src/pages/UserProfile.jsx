@@ -23,6 +23,8 @@ import { createTheme } from '@mui/material/styles';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import CallIcon from '@mui/icons-material/Call';
 import PregnantWomanIcon from '@mui/icons-material/PregnantWoman';
+import { useEffect } from 'react';
+import API from '../api';
 
 const theme = createTheme();
 const StyledToggleButtonGroup = styled(ToggleButtonGroup)(() => ({
@@ -237,7 +239,7 @@ const Card = styled.div`
 `;
 
 const CardImage = styled.img`
-    height: 100px;
+    height: 150px;
 `;
 
 const CardTitle = styled.div`
@@ -320,8 +322,24 @@ const UserProfile = () => {
     const [alignment, setAlignment] = React.useState('left');
     const [formats, setFormats] = React.useState(() => ['italic']);
     const userInfoDetails = JSON.parse(localStorage.getItem("userInfo"));
+    const [appointment, setAppointment] = useState();
 
-    console.log("userInfoDetails",userInfoDetails)
+    useEffect(() => {
+        const getAppointments = async () => {
+            try {
+                const result = await API.get(`appointment/user/${userInfoDetails._id}`)
+                console.log("result+++++++", result.data[0])
+                if (result.length !== 0) {
+                    setAppointment(result.data[0]);
+                }
+            } catch (err) {
+                console.log("err", err)
+            }
+        };
+        getAppointments();
+    }, []);
+
+    console.log("userInfoDetails", userInfoDetails)
     const handleFormat = (event, newFormats) => {
         setFormats(newFormats);
     };
@@ -351,13 +369,13 @@ const UserProfile = () => {
 
                             <Grid container spacing={2}>
                                 <Grid sx={{ marginRight: '25px', borderRadius: '10px' }} item xs={4}>
-                                    <div style={{ backgroundColor: '#fff', marginBottom: '25px', padding: '15px', borderRadius: '10px', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
+                                    <div style={{ height: '420px', backgroundColor: '#fff', marginBottom: '25px', padding: '15px', borderRadius: '10px', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
 
                                         <CardContainer style={{ borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
                                             <FlexBox style={{ backgroundColor: '#fff', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
-                                                <Avatar sx={{ width: 80, height: 80 }} alt={userInfoDetails.fullName} src="/static/images/avatar/2.jpg" />
+                                                <Avatar sx={{ width: 80, height: 80 }} alt={userInfoDetails && userInfoDetails.fullName} src="/static/images/avatar/2.jpg" />
                                             </FlexBox>
-                                            <InsTitle style={{ backgroundColor: '#fff' }}>{userInfoDetails.fullName}</InsTitle>
+                                            <InsTitle style={{ backgroundColor: '#fff' }}>{userInfoDetails && userInfoDetails.fullName}</InsTitle>
 
                                             <div style={{ display: 'flex', justifyContent: 'space-between', padding: '10px' }}>
                                                 <div style={{ display: 'flex' }}>
@@ -365,7 +383,7 @@ const UserProfile = () => {
                                                     <div style={{ display: 'flex', alignItems: 'center', paddingLeft: '10px' }}> From</div>
                                                 </div>
                                                 <div>
-                                                {userInfoDetails.address}
+                                                    {userInfoDetails && userInfoDetails.address}
                                                 </div>
                                             </div>
 
@@ -375,7 +393,7 @@ const UserProfile = () => {
                                                     <div style={{ display: 'flex', alignItems: 'center', paddingLeft: '10px' }}> Contact</div>
                                                 </div>
                                                 <div>
-                                                {userInfoDetails.mobileNo}
+                                                    {userInfoDetails && userInfoDetails.mobileNo}
                                                 </div>
                                             </div>
 
@@ -385,7 +403,7 @@ const UserProfile = () => {
                                                     <div style={{ display: 'flex', alignItems: 'center', paddingLeft: '10px' }}> Email</div>
                                                 </div>
                                                 <div>
-                                                {userInfoDetails.email}
+                                                    {userInfoDetails && userInfoDetails.email}
                                                 </div>
                                             </div>
 
@@ -395,7 +413,7 @@ const UserProfile = () => {
                                                     <div style={{ display: 'flex', alignItems: 'center', paddingLeft: '10px' }}> Pregnancy Month</div>
                                                 </div>
                                                 <div>
-                                                {(((userInfoDetails.pregnancyDate.split('T'))[0]).split('-'))[1]}
+                                                    {userInfoDetails && (((userInfoDetails.pregnancyDate.split('T'))[0]).split('-'))[1]}
                                                 </div>
                                             </div>
 
@@ -403,10 +421,44 @@ const UserProfile = () => {
                                     </div>
                                 </Grid>
                                 <Grid sx={{ marginLeft: '25px', borderRadius: '10px' }} item xs={7}>
-                                    <div style={{ height: '300px', backgroundColor: '#fff', marginBottom: '25px', borderRadius: '10px', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
+                                    <div style={{ height: '450px', backgroundColor: '#fff', marginBottom: '25px', borderRadius: '10px', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
 
                                         <div style={{ fontSize: '20px', color: '#fff', padding: '10px', backgroundColor: '#956C6E', height: '30px', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
                                             <div><b>Dashboard</b></div>
+                                        </div>
+                                        <div style={{ padding: '10px 30px ' }}><b>Recent Magazines you have read</b></div>
+                                        <div style={{ paddingLeft: '60px' }}>
+                                            <Grid container >
+                                                <Grid sx={{ cursor: 'pointer' }} onClick={() => { window.open('https://www.pnmag.com/', '_blank'); }} item xs={2}>
+                                                    <CardImage src="https://i.ibb.co/SQkCKxZ/pr1.png" />
+                                                </Grid>
+                                                <Grid sx={{ cursor: 'pointer' }} onClick={() => { window.open('https://www.fitpregnancy.com/', '_blank'); }} item xs={2}>
+                                                    <CardImage src="https://i.ibb.co/8XdMr04/pr2.jpg" />
+                                                </Grid>
+                                                <Grid sx={{ cursor: 'pointer' }} onClick={() => { window.open('https://www.whattoexpect.com/pregnancy/', '_blank'); }} item xs={2}>
+                                                    <CardImage src="https://i.ibb.co/yVCyQSd/pr3.jpg" />
+                                                </Grid>
+
+                                            </Grid>
+                                        </div>
+                                        <div style={{ padding: '10px 30px ' }}><b>Recent Audio books you listened</b></div>
+
+                                        <div style={{ paddingLeft: '60px' }}>
+
+                                            <Grid container >
+                                                <Grid sx={{ cursor: 'pointer' }} onClick={() => { window.open('https://www.pnmag.com/', '_blank'); }} item xs={2}>
+                                                    <CardImage src="https://i.ibb.co/C6yQZYB/51-Ue-UJRbwu-S-SL500.jpg" />
+                                                </Grid>
+                                                <Grid sx={{ cursor: 'pointer' }} onClick={() => { window.open('https://www.fitpregnancy.com/', '_blank'); }} item xs={2}>
+                                                    <CardImage src="https://i.ibb.co/9V8fYFx/41-B9-Gjp3ea-L-SL500.jpg" />
+                                                </Grid>
+                                                <Grid sx={{ cursor: 'pointer' }} onClick={() => { window.open('https://www.whattoexpect.com/pregnancy/', '_blank'); }} item xs={2}>
+                                                    <CardImage src="https://i.ibb.co/G5788YJ/41-Ab-MFY2y0-L-SL500.jpg" />
+                                                </Grid>
+                                                <Grid sx={{ cursor: 'pointer' }} onClick={() => { window.open('https://www.popsugar.com/family/pregnancy', '_blank'); }} item xs={2}>
+                                                    <CardImage src="https://i.ibb.co/JCGyRMm/418ekjfs-HZL-SL500.jpg" />
+                                                </Grid>
+                                            </Grid>
                                         </div>
                                     </div>
                                 </Grid>
@@ -417,47 +469,47 @@ const UserProfile = () => {
 
                             <Grid container spacing={2}>
                                 <Grid sx={{ marginRight: '25px', borderRadius: '10px' }} item xs={4}>
-                                    <div style={{ height: '350px', backgroundColor: '#fff', marginBottom: '25px', padding: '15px', borderRadius: '10px', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
+                                    <div style={{ height: '450px', backgroundColor: '#fff', marginBottom: '25px', padding: '15px', borderRadius: '10px', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
 
                                         <DescTitle>Protein Recommendations </DescTitle>
                                         <Grid container spacing={2}>
                                             <Grid item xs={6}>
-                                                <div style={{ width:'150px',border: '2px solid #956C6E' }}>
+                                                <div style={{ width: '150px', border: '2px solid #956C6E' }}>
                                                     <SimpleFlexBox>
                                                         <CardImage src="https://i.ibb.co/GRCzYwF/proteinex-mama-chocolate-png.png" />
                                                     </SimpleFlexBox>
                                                     <SimpleFlexBox>
-                                                        <div style={{ width:'150px',display:'flex',justifyContent:'center',color: '#fff', backgroundColor: '#956C6E',padding:'10px', cursor:'pointer' }}><b>Shop Now</b></div>
+                                                        <div style={{ width: '150px', display: 'flex', justifyContent: 'center', color: '#fff', backgroundColor: '#956C6E', padding: '10px', cursor: 'pointer' }}><b>Shop Now</b></div>
                                                     </SimpleFlexBox>
                                                 </div>
                                             </Grid>
                                             <Grid item xs={6}>
-                                            <div style={{ width:'150px',border: '2px solid #956C6E' }}>
+                                                <div style={{ width: '150px', border: '2px solid #956C6E' }}>
                                                     <SimpleFlexBox>
                                                         <CardImage src="https://i.ibb.co/7jTdGM4/Vivamom-Maternal-Nutrition-Supplement-removebg-preview.png" />
                                                     </SimpleFlexBox>
                                                     <SimpleFlexBox>
-                                                        <div style={{ width:'150px',display:'flex',justifyContent:'center',color: '#fff', backgroundColor: '#956C6E',padding:'10px', cursor:'pointer' }}><b>Shop Now</b></div>
+                                                        <div style={{ width: '150px', display: 'flex', justifyContent: 'center', color: '#fff', backgroundColor: '#956C6E', padding: '10px', cursor: 'pointer' }}><b>Shop Now</b></div>
                                                     </SimpleFlexBox>
                                                 </div>
                                             </Grid>
                                             <Grid item xs={6}>
-                                            <div style={{ width:'150px',border: '2px solid #956C6E' }}>
+                                                <div style={{ width: '150px', border: '2px solid #956C6E' }}>
                                                     <SimpleFlexBox>
                                                         <CardImage src="https://i.ibb.co/F6b0Xr2/Horlick-removebg-preview.png" />
                                                     </SimpleFlexBox>
                                                     <SimpleFlexBox>
-                                                        <div style={{ width:'150px',display:'flex',justifyContent:'center',color: '#fff', backgroundColor: '#956C6E',padding:'10px', cursor:'pointer' }}><b>Shop Now</b></div>
+                                                        <div style={{ width: '150px', display: 'flex', justifyContent: 'center', color: '#fff', backgroundColor: '#956C6E', padding: '10px', cursor: 'pointer' }}><b>Shop Now</b></div>
                                                     </SimpleFlexBox>
                                                 </div>
                                             </Grid>
                                             <Grid item xs={6}>
-                                            <div style={{ width:'150px',border: '2px solid #956C6E' }}>
+                                                <div style={{ width: '150px', border: '2px solid #956C6E' }}>
                                                     <SimpleFlexBox>
                                                         <CardImage src="https://i.ibb.co/Gs4CYK2/geofit-mom-removebg-preview.png" />
                                                     </SimpleFlexBox>
                                                     <SimpleFlexBox>
-                                                        <div style={{ width:'150px',display:'flex',justifyContent:'center',color: '#fff', backgroundColor: '#956C6E',padding:'10px', cursor:'pointer' }}><b>Shop Now</b></div>
+                                                        <div style={{ width: '150px', display: 'flex', justifyContent: 'center', color: '#fff', backgroundColor: '#956C6E', padding: '10px', cursor: 'pointer' }}><b>Shop Now</b></div>
                                                     </SimpleFlexBox>
                                                 </div>
                                             </Grid>
@@ -465,7 +517,7 @@ const UserProfile = () => {
                                     </div>
                                 </Grid>
                                 <Grid sx={{ marginLeft: '25px', borderRadius: '10px' }} item xs={7}>
-                                    <div style={{ height: '330px', backgroundColor: '#fff', marginBottom: '25px', borderRadius: '10px', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
+                                    <div style={{ height: '480px', marginTop: '15px', backgroundColor: '#fff', marginBottom: '25px', borderRadius: '10px', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
 
 
 
@@ -473,22 +525,23 @@ const UserProfile = () => {
                                             <Grid sx={{ marginRight: '25px', borderRadius: '10px' }} item xs={5}>
                                                 <div style={{ backgroundColor: '#FFB6C1', marginBottom: '25px', marginLeft: '25px', borderRadius: '10px' }}>
 
-                                                    <CardContainer >
-                                                        <div style={{ fontSize: '15px', color: '#fff', padding: '10px', backgroundColor: '#956C6E', height: '50px', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
+                                                    {appointment &&
+                                                        <CardContainer >
+                                                            <div style={{ fontSize: '15px', color: '#fff', padding: '10px', backgroundColor: '#956C6E', height: '50px', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
 
-                                                            <FlexBox style={{ backgroundColor: 'transparent' }}>
-                                                                <Avatar sx={{ width: 80, height: 80 }} alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                                                            </FlexBox>
-                                                            <InsTitle><b>Dr. Gaia Kodithuwakku</b></InsTitle>
-                                                            <InsTitle>VOG</InsTitle>
+                                                                <FlexBox style={{ backgroundColor: 'transparent' }}>
+                                                                    <Avatar sx={{ width: 80, height: 80 }} alt={appointment && appointment.doctorName} src="/static/images/avatar/2.jpg" />
+                                                                </FlexBox>
+                                                                <InsTitle><b>{appointment && appointment.doctorName}</b></InsTitle>
+                                                                <InsTitle>{appointment && appointment.specialization}</InsTitle>
 
-                                                        </div>
-                                                        <div style={{ height: '230px', display: 'flex', alignItems: 'flex-end', justifyContent: 'center' }}>
-                                                            <FlexBox >
-                                                                <Button>View Profile</Button>
-                                                            </FlexBox>
-                                                        </div>
-                                                        {/* <div style={{ display: 'flex', justifyContent: 'space-between', paddingTop: '100px' }}>
+                                                            </div>
+                                                            <div style={{ height: '230px', display: 'flex', alignItems: 'flex-end', justifyContent: 'center' }}>
+                                                                <FlexBox >
+                                                                    <Button>View Profile</Button>
+                                                                </FlexBox>
+                                                            </div>
+                                                            {/* <div style={{ display: 'flex', justifyContent: 'space-between', paddingTop: '100px' }}>
                                                 <div style={{ display: 'flex' }}>
                                                     <StarIcon />
                                                     <div style={{ display: 'flex', alignItems: 'center', paddingLeft: '10px' }}>Rating</div>
@@ -497,7 +550,7 @@ const UserProfile = () => {
                                                     4.5/5
                                                 </div>
                                             </div> */}
-                                                    </CardContainer>
+                                                        </CardContainer>}
                                                 </div>
                                             </Grid>
                                             <Grid sx={{ marginRight: '25px', borderRadius: '10px' }} item xs={6}>
@@ -506,24 +559,27 @@ const UserProfile = () => {
 
 
                                                 </div>
-                                                <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
-                                                    <div>
-                                                        <div style={{ fontSize: '15px', color: '#808080', paddingTop: '20px' }}>Session Date </div>
-                                                        <div style={{ fontSize: '18px', color: '#000' }}><b>11/11/2023</b></div>
-                                                    </div>
-                                                    <div>
-                                                        <div style={{ fontSize: '15px', color: '#808080', paddingTop: '20px' }}>Session Period </div>
-                                                        <div style={{ fontSize: '18px', color: '#000' }}><b>Morning</b></div>
-                                                    </div>
-                                                    <div>
-                                                        <div style={{ fontSize: '15px', color: '#808080', paddingTop: '20px' }}>Session Time </div>
-                                                        <div style={{ fontSize: '18px', color: '#000' }}><b>11:30AM</b></div>
-                                                    </div>
-                                                </div>
 
+                                                {appointment &&
+                                                    <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
+                                                        <div>
+                                                            <div style={{ fontSize: '15px', color: '#808080', paddingTop: '20px' }}>Session Date </div>
+                                                            <div style={{ fontSize: '18px', color: '#000' }}><b>{appointment && appointment.appointmentDate}</b></div>
+                                                        </div>
+                                                        <div>
+                                                            <div style={{ fontSize: '15px', color: '#808080', paddingTop: '20px' }}>Session Period </div>
+                                                            <div style={{ fontSize: '18px', color: '#000' }}><b>{appointment && ((appointment.appointmentTime).split(" "))[1] == "AM" ? 'Morning' : 'Evening'}</b></div>
+                                                        </div>
+                                                        <div>
+                                                            <div style={{ fontSize: '15px', color: '#808080', paddingTop: '20px' }}>Session Time </div>
+                                                            <div style={{ fontSize: '18px', color: '#000' }}><b>{appointment && appointment.appointmentTime}</b></div>
+                                                        </div>
+                                                    </div>
+                                                }
                                                 <div>
                                                     <div style={{ backgroundColor: '#FFB6C1', borderRadius: '10px', display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50px', fontSize: '14px', color: '#000', marginTop: '40px' }}><div>How was the appointment went? </div><RewButton>Leave a Review</RewButton></div>
                                                 </div>
+
                                             </Grid>
 
                                         </Grid>
