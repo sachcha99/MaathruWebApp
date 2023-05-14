@@ -23,7 +23,6 @@ import { createTheme } from '@mui/material/styles';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import CallIcon from '@mui/icons-material/Call';
 
-import ReactPlayer from 'react-player'
 
 const theme = createTheme();
 const StyledToggleButtonGroup = styled(ToggleButtonGroup)(() => ({
@@ -300,7 +299,7 @@ const ChannelButton = styled.button`
 `;
 const InstructorProfile = () => {
 
-    const userInfoDetails = JSON.parse(localStorage.getItem("userInfo"));
+
     const [alignment, setAlignment] = React.useState('left');
     const [formats, setFormats] = React.useState(() => ['italic']);
 
@@ -339,7 +338,7 @@ const InstructorProfile = () => {
                                             <FlexBox style={{ borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
                                                 <Avatar sx={{ width: 80, height: 80 }} alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
                                             </FlexBox>
-                                            <InsTitle>{userInfoDetails?.fullName}</InsTitle>
+                                            <InsTitle>Gaia Kodithuwakku</InsTitle>
 
                                             <div style={{ display: 'flex', justifyContent: 'space-between', padding: '10px' }}>
                                                 <div style={{ display: 'flex' }}>
@@ -347,7 +346,7 @@ const InstructorProfile = () => {
                                                     <div style={{ display: 'flex', alignItems: 'center', paddingLeft: '10px' }}> From</div>
                                                 </div>
                                                 <div>
-                                                    {userInfoDetails?.address}
+                                                    Nugegoda
                                                 </div>
                                             </div>
 
@@ -357,7 +356,7 @@ const InstructorProfile = () => {
                                                     <div style={{ display: 'flex', alignItems: 'center', paddingLeft: '10px' }}> Contact</div>
                                                 </div>
                                                 <div>
-                                                    {userInfoDetails?.mobileNo}
+                                                    071 452 4789
                                                 </div>
                                             </div>
 
@@ -367,7 +366,7 @@ const InstructorProfile = () => {
                                                     <div style={{ display: 'flex', alignItems: 'center', paddingLeft: '10px' }}> Email</div>
                                                 </div>
                                                 <div>
-                                                    {userInfoDetails?.email}
+                                                    gayakodi@gmail.com
                                                 </div>
                                             </div>
 
@@ -379,9 +378,6 @@ const InstructorProfile = () => {
 
                                         <div style={{ fontSize: '20px', color: '#fff', padding: '10px', backgroundColor: '#956C6E', height: '30px', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
                                             <div><b>My Portfolio</b></div>
-                                        </div>
-                                        <div style={{width: "100%"}}>
-                                            <ReactPlayer height={"250px"} width={"800px"} url={userInfoDetails?.portfolio} controls={true} />
                                         </div>
                                     </div>
                                 </Grid>
@@ -396,7 +392,8 @@ const InstructorProfile = () => {
 
                                         <DescTitle>Description</DescTitle>
                                         <div style={{ fontSize: '12px' }}>
-                                            {userInfoDetails?.description}
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus est nibh, malesuada sit amet pharetra at, gravida quis sapien. Nam ac congue lacus. In blandit orci sit amet lacus ultricies hendrerit. Etiam at tellus in sapien consectetur suscipit quis sit amet nulla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Proin et efficitur tellus. Duis placerat diam id efficitur euismod.
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus est nibh, malesuada sit amet pharetra at, gravida quis sapien. Nam ac congue lacus. In blandit orci sit amet lacus ultricies hendrerit. Etiam at tellus in sapien consectetur suscipit quis sit amet nulla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
                                         </div>
                                     </div>
                                 </Grid>

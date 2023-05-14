@@ -31,7 +31,10 @@ import TextField from '@mui/material/TextField';
 import BadgeIcon from '@mui/icons-material/Badge';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import KeyIcon from '@mui/icons-material/Key';
+import PaymentsModal from '../components/PaymentsModal';
+import { newAppointment } from '../redux/appointment';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom";
 
 
 const theme = createTheme();
@@ -249,6 +252,7 @@ const Card = styled.div`
 
 `;
 
+
 const CardImage = styled.img`
     padding-top:25px;
     height: 100px;
@@ -325,10 +329,27 @@ const ChannelButton = styled.button`
 `;
 const Channel = () => {
 
+    const dispatch = useDispatch();
+    let navigate = useNavigate();
 
     const [alignment, setAlignment] = React.useState('left');
     const [formats, setFormats] = React.useState(() => ['italic']);
     const [userDetails, setUserDetails] = useState({ fullName: "", email: "", userType: "mother", password: "", confirmPassword: "", address: "", birthDate: dayjs('2022-04-17'), mobileNo: "", pregnancyDate: dayjs('2022-04-17') })
+   const [ pregnancyDate, setPregnancyDate]= useState("")
+   const userInfoDetails = JSON.parse(localStorage.getItem("userInfo"));
+
+    const handleBirthdate = (value) => {
+        console.log("value::", value.$d.toISOString().split('T')[0]);
+        setUserDetails({ ...userDetails, birthDate: value })
+        dispatch(newAppointment({...appointment.value.data, 'patientBirthDate': value.$d.toISOString().split('T')[0]}))   
+    };
+
+    const handleDate = (value) => {
+        console.log("value::", value.$d.toISOString().split('T')[0]);
+        setPregnancyDate(value.$d.toISOString().split('T')[0]);
+        setUserDetails({ ...userDetails, pregnancyDate: value })
+        dispatch(newAppointment({...appointment.value.data, 'patientPregnancyDate':value.$d.toISOString().split('T')[0]}))  
+    };
 
     const handleFormat = (event, newFormats) => {
         setFormats(newFormats);
@@ -370,8 +391,8 @@ const Channel = () => {
                                                 <FlexBox style={{ backgroundColor: 'transparent' }}>
                                                     <Avatar sx={{ width: 80, height: 80 }} alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
                                                 </FlexBox>
-                                                <InsTitle><b>Dr. Gaia Kodithuwakku</b></InsTitle>
-                                                <InsTitle>VOG</InsTitle>
+                                                <InsTitle><b>{appointment && appointment.value.data.doctorName}</b></InsTitle>
+                                                <InsTitle>{appointment && appointment.value.data.specialization}</InsTitle>
 
                                             </div>
                                             <div style={{ height: '230px', display: 'flex', alignItems: 'flex-end', justifyContent: 'center' }}>
@@ -395,13 +416,13 @@ const Channel = () => {
                                         <ReviewsTitle>Appointment Details</ReviewsTitle>
 
                                         <div style={{ fontSize: '15px', color: '#808080', paddingTop: '20px' }}>Session Date </div>
-                                        <div style={{ fontSize: '18px', color: '#000' }}><b>11/11/2023</b></div>
+                                        <div style={{ fontSize: '18px', color: '#000' }}><b>{appointment && appointment.value.data.appointmentDate}</b></div>
 
                                         <div style={{ fontSize: '15px', color: '#808080', paddingTop: '20px' }}>Session Period </div>
-                                        <div style={{ fontSize: '18px', color: '#000' }}><b>Morning</b></div>
+                                        <div style={{ fontSize: '18px', color: '#000' }}><b>{appointment && ((appointment.value.data.appointmentTime).split(" "))[1]== "AM" ? 'Morning' : 'Evening'}</b></div>
 
                                         <div style={{ fontSize: '15px', color: '#808080', paddingTop: '20px' }}>Session Time </div>
-                                        <div style={{ fontSize: '18px', color: '#000' }}><b>11:30AM</b></div>
+                                        <div style={{ fontSize: '18px', color: '#000' }}><b>{appointment && appointment.value.data.appointmentTime}</b></div>
 
                                         <div style={{ fontSize: '12px' }}>
                                         </div>
@@ -414,7 +435,7 @@ const Channel = () => {
                                     <div style={{ backgroundColor: '#fff', marginBottom: '25px', borderRadius: '10px' }}>
                                         <div style={{ fontSize: '15px', color: '#fff', padding: '10px', backgroundColor: '#956C6E', height: '50px', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
                                             <div><b>Welcome to Maathru</b></div>
-                                            Wishing you good health Mrs. Alexadra fernando
+                                            Wishing you good health {userInfoDetails && userInfoDetails.fullName}
                                         </div>
                                         <div style={{     height: '580px',display: 'flex', flexDirection: 'column', padding: '15px', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap' }}>
                                             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', width: '100%', marginLeft: '25px' }}>
@@ -426,7 +447,7 @@ const Channel = () => {
                                                 id="fullName"
                                                 autoComplete='off'
                                                 value={userDetails.fullName}
-                                                onChange={(e) => { setUserDetails({ ...userDetails, fullName: e.target.value }) }}
+                                                onChange={(e) => { setUserDetails({ ...userDetails, fullName: e.target.value });  dispatch(newAppointment({...appointment.value.data, 'patientFullName': e.target.value}))     }}
                                                 sx={{
                                                     "& .MuiInputBase-root": {
                                                         width: 500
@@ -459,7 +480,7 @@ const Channel = () => {
                                                 type="tel"
                                                 autoComplete='off'
                                                 value={userDetails.mobileNo}
-                                                onChange={(e) => { setUserDetails({ ...userDetails, mobileNo: e.target.value }) }}
+                                                onChange={(e) => { setUserDetails({ ...userDetails, mobileNo: e.target.value }) ;  dispatch(newAppointment({...appointment.value.data, 'patientMobileNo': e.target.value}))   }}
                                                 sx={{
                                                     "& .MuiInputBase-root": {
                                                         width: 500
@@ -487,7 +508,7 @@ const Channel = () => {
 
                                             <TextField
                                                 label="E-mail"
-                                                onChange={(e) => { setUserDetails({ ...userDetails, email: e.target.value }) }}
+                                                onChange={(e) => { setUserDetails({ ...userDetails, email: e.target.value });  dispatch(newAppointment({...appointment.value.data, 'patientEmail': e.target.value}))   }}
                                                 value={userDetails.email}
                                                 type='email'
                                                 id="email"
@@ -522,7 +543,7 @@ const Channel = () => {
 
                                                     <DatePicker
                                                         label="Birth Date"
-                                                        onChange={(newValue) => { setUserDetails({ ...userDetails, birthDate: newValue }) }}
+                                                        onChange={(newValue) => { handleBirthdate(newValue) }}
                                                         value={userDetails.birthDate}
                                                         sx={{
                                                             "& .MuiInputBase-root": {
@@ -551,7 +572,8 @@ const Channel = () => {
 
                                                     <DatePicker
                                                         label="Date of Pregnancy"
-                                                        onChange={(newValue) => { setUserDetails({ ...userDetails, pregnancyDate: newValue }) }}
+                                                        onChange={(newValue) => { handleDate(newValue) }}
+                                                        
                                                         value={userDetails.pregnancyDate}
                                                         sx={{
                                                             "& .MuiInputBase-root": {
@@ -577,8 +599,8 @@ const Channel = () => {
 
                                             <ButtonContainer style={{display:'flex', justifyContent:'space-evenly', width:'100%'}}>
                                     <Button>Go Back</Button>
-                                    <ChannelButton>Confirm & Pay</ChannelButton>
-
+                                    {/* <PaymentsModal disabled={!appointment.value.data.patientFullName && !appointment.value.data.patientMobileNo && !appointment.value.data.patientEmail && !appointment.value.data.patientBirthDate && !appointment.value.data.patientPregnancyDate  }/> */}
+                                    <CheckButton onClick={() => { navigate('/payment') }}>Confirm & Pay</CheckButton>
                                     </ButtonContainer>
                                         </div>
                                     </div>
@@ -589,16 +611,17 @@ const Channel = () => {
                                         <ReviewsTitle>Patient Details</ReviewsTitle>
 
                                         <div style={{ fontSize: '15px', color: '#808080', paddingTop: '20px' }}>Name </div>
-                                        <div style={{ fontSize: '18px', color: '#000' }}><b>11/11/2023</b></div>
+                                        <div style={{ fontSize: '18px', color: '#000' }}><b>{userDetails && userDetails.fullName ? userDetails.fullName : ""}</b></div>
 
                                         <div style={{ fontSize: '15px', color: '#808080', paddingTop: '20px' }}>Mobile No </div>
-                                        <div style={{ fontSize: '18px', color: '#000' }}><b>Morning</b></div>
+                                        <div style={{ fontSize: '18px', color: '#000' }}><b>{userDetails && userDetails.mobileNo ?userDetails.mobileNo : ""}</b></div>
 
                                         <div style={{ fontSize: '15px', color: '#808080', paddingTop: '20px' }}>Email</div>
-                                        <div style={{ fontSize: '18px', color: '#000' }}><b>11:30AM</b></div>
+                                        <div style={{ fontSize: '18px', color: '#000' }}><b>{userDetails && userDetails.email ?userDetails.email: ""}</b></div>
 
                                         <div style={{ fontSize: '15px', color: '#808080', paddingTop: '20px' }}>Pregnancy Date</div>
-                                        <div style={{ fontSize: '18px', color: '#000' }}><b>11/11/2023</b></div>
+                                        <div style={{ fontSize: '18px', color: '#000' }}><b>{pregnancyDate && pregnancyDate}</b></div>
+
 
                                         <div style={{ fontSize: '12px' }}>
                                         </div>

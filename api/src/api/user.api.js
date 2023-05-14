@@ -5,11 +5,10 @@ const UserController = require('../controller/user.controller');
 module.exports = function (){
     router.get('/', UserController.getAllUser);
     router.get('/:id', UserController.getUserById);
+    router.get('/type/:type', UserController.getUserByType);
     router.post('/create', UserController.createUser);
     router.put('/update', UserController.updateUser);
     router.post('/validate', UserController.validateUser);
     router.post('/delete',UserController.deleteUser);
-    router.get('/type/:ss', UserController.getAllInstructors);
-    router.put('/update/:id', UserController.updateUserById);
     return router;
 }

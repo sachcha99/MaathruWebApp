@@ -32,6 +32,8 @@ import BadgeIcon from '@mui/icons-material/Badge';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import KeyIcon from '@mui/icons-material/Key';
 import PaymentsModal from '../components/PaymentsModal';
+import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux';
 
 
 const theme = createTheme();
@@ -349,7 +351,9 @@ const Payment = () => {
     function disableRandomDates() {
         return Math.random() > 0.7;
     }
-
+    
+    const appointment = useSelector((state) => state.appointment)
+    console.log("appointment:::====",appointment)
     return (
         <>
             <Container>
@@ -367,13 +371,13 @@ const Payment = () => {
                                         <ReviewsTitle>Appointment Details</ReviewsTitle>
 
                                         <div style={{ fontSize: '15px', color: '#808080', paddingTop: '20px' }}>Session Date </div>
-                                        <div style={{ fontSize: '18px', color: '#000' }}><b>11/11/2023</b></div>
+                                        <div style={{ fontSize: '18px', color: '#000' }}><b>{appointment && appointment.value.data.appointmentDate}</b></div>
 
                                         <div style={{ fontSize: '15px', color: '#808080', paddingTop: '20px' }}>Session Period </div>
-                                        <div style={{ fontSize: '18px', color: '#000' }}><b>Morning</b></div>
+                                        <div style={{ fontSize: '18px', color: '#000' }}><b>{appointment && ((appointment.value.data.appointmentTime).split(" "))[1]== "AM" ? 'Morning' : 'Evening'}</b></div>
 
                                         <div style={{ fontSize: '15px', color: '#808080', paddingTop: '20px' }}>Session Time </div>
-                                        <div style={{ fontSize: '18px', color: '#000' }}><b>11:30AM</b></div>
+                                        <div style={{ fontSize: '18px', color: '#000' }}><b>{appointment && appointment.value.data.appointmentTime}</b></div>
 
                                         <div style={{ fontSize: '12px' }}>
                                         </div>
@@ -384,16 +388,16 @@ const Payment = () => {
                                         <ReviewsTitle>Patient Details</ReviewsTitle>
 
                                         <div style={{ fontSize: '15px', color: '#808080', paddingTop: '20px' }}>Name </div>
-                                        <div style={{ fontSize: '18px', color: '#000' }}><b>11/11/2023</b></div>
+                                        <div style={{ fontSize: '18px', color: '#000' }}><b>{appointment && appointment.value.data.patientFullName}</b></div>
 
                                         <div style={{ fontSize: '15px', color: '#808080', paddingTop: '20px' }}>Mobile No </div>
-                                        <div style={{ fontSize: '18px', color: '#000' }}><b>Morning</b></div>
+                                        <div style={{ fontSize: '18px', color: '#000' }}><b>{appointment && appointment.value.data.patientMobileNo}</b></div>
 
                                         <div style={{ fontSize: '15px', color: '#808080', paddingTop: '20px' }}>Email</div>
-                                        <div style={{ fontSize: '18px', color: '#000' }}><b>11:30AM</b></div>
+                                        <div style={{ fontSize: '18px', color: '#000' }}><b>{appointment && appointment.value.data.patientEmail}</b></div>
 
                                         <div style={{ fontSize: '15px', color: '#808080', paddingTop: '20px' }}>Pregnancy Date</div>
-                                        <div style={{ fontSize: '18px', color: '#000' }}><b>11/11/2023</b></div>
+                                        <div style={{ fontSize: '18px', color: '#000' }}><b>{appointment && appointment.value.data.patientPregnancyDate}</b></div>
 
                                         <div style={{ fontSize: '12px' }}>
                                         </div>
@@ -445,7 +449,7 @@ const Payment = () => {
                                 <Button>
                                 <Image src="https://i.ibb.co/YB3xS2T/Pay-Pal-svg.png" />
                                 </Button>
-                                                                <PaymentsModal/>
+                                    <PaymentsModal disabled={!appointment.value.data.patientFullName && !appointment.value.data.patientMobileNo && !appointment.value.data.patientEmail && !appointment.value.data.patientBirthDate && !appointment.value.data.patientPregnancyDate  }/>
 
                             </ButtonContainer>
 

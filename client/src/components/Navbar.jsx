@@ -105,17 +105,15 @@ const Navbar = () => {
   const logout = (e) => {
     localStorage.removeItem("token");
     localStorage.removeItem("userInfo");
-    navigate("/");
     window.location.reload();
+    navigate("/");
   };
 
   const handleClickMenuItem = () => {
     if (userInfoDetails?.userType === "admin") {
       navigate("/dashboard");
-    } else if (userInfoDetails?.userType === "mother") {
-      navigate("/profile");
     } else {
-      navigate("/insProfile");
+      navigate("/profile");
     }
   };
 
@@ -131,10 +129,10 @@ const Navbar = () => {
           <Link style={{ textDecoration: "none" }} to="/">
             <MenuItm>HOME</MenuItm>
           </Link>
-          <Link style={{ textDecoration: "none" }} to="/products">
+          <Link style={{ textDecoration: "none" }} to="/">
             <MenuItm>SERVICES</MenuItm>
           </Link>
-          <Link style={{ textDecoration: "none" }} to="/categories">
+          <Link style={{ textDecoration: "none" }} to="/">
             <MenuItm>ABOUT US</MenuItm>
           </Link>
           <Box
@@ -146,14 +144,10 @@ const Navbar = () => {
               paddingInline: 1,
               paddingBlock: 0.5,
             }}
+            onClick={handleOpenUserMenu}
           >
             <Tooltip title={token ? "open menu" : "login"}>
-              <Stack
-                flexDirection="row"
-                gap={1}
-                alignItems="center"
-                onClick={handleOpenUserMenu}
-              >
+              <Stack flexDirection="row" gap={1} alignItems="center">
                 <IconButton sx={{ p: 0 }}>
                   <AccountCircleIcon sx={{ color: "white" }} />
                 </IconButton>
@@ -216,4 +210,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Navbar;  

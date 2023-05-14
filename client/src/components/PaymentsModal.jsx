@@ -13,6 +13,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
 
+
 const Button = styled.button`
 padding: 12px;
 font-size: 15px;
@@ -34,9 +35,35 @@ height:60px;
   color: #fff;  }
 `;
 
+const ChannelButton = styled.button`
+  padding: 12px 25px;
+  font-size: 15px;
+  background-color: #956C6E;
+  cursor: pointer;
+  border: 2px solid #956C6E;
+  border-radius: 6px;
+  color: #fff;
+  margin: 15px 0;
+  transition: 0.8s;
 
 
-function PaymentsModal({isBuyer}) {
+  &:hover {
+    opacity: 1;
+    background-color: #fff;
+    border: 2px solid #956C6E;
+    color: #956C6E; 
+
+}
+
+
+&:disabled {
+    opacity: 0.3; 
+
+}
+`;
+
+
+function PaymentsModal({disabled}) {
     const [stripePromise, setStripePromise] = useState(null);
     const [clientSecret, setClientSecret] = useState("");
     const [open, setOpen] = useState(false);
@@ -93,7 +120,7 @@ function PaymentsModal({isBuyer}) {
                     <DialogContent>
                         {clientSecret && stripePromise && (
                             <Elements stripe={stripePromise} options={{ clientSecret }}>
-                                <CheckoutForm handleCloseModal={handleCloseModal} isBuyer={isBuyer} />
+                                <CheckoutForm handleCloseModal={handleCloseModal} />
                             </Elements>
                         )}
                     </DialogContent>

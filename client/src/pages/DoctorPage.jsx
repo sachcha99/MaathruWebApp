@@ -287,6 +287,10 @@ const ChannelButton = styled.button`
     background-color: #fff;
     border: 2px solid #956C6E;
     color: #956C6E;  }
+
+    
+  &:disabled {
+    opacity: 0.3;  }
 `;
 const DoctorPage = () => {
 
@@ -302,6 +306,7 @@ const DoctorPage = () => {
 
     const handleTime = (event, newTime) => {
         setTime(newTime);
+        dispatch(newAppointment({...appointment.value.data, 'appointmentTime': newTime}))
         // dispatch(newAppointment({ 'appTime':newTime}))
     };
     function disableWeekends() {
@@ -310,6 +315,12 @@ const DoctorPage = () => {
         return dt.getDay() === 0 || dt.getDay() === 6;
     }
 
+    const handleDate = (value) => {
+       console.log("value::",value.$d.toISOString().split('T')[0]);
+       setValue(value)
+        dispatch(newAppointment({...appointment.value.data,'appointmentDate': value.$d.toISOString().split('T')[0]}))
+        // dispatch(newAppointment({ 'appTime':newTime}))
+    };
     
     function disableRandomDates() {
         return Math.random() > 0.7;
@@ -380,12 +391,13 @@ const DoctorPage = () => {
                                 </Grid>
                                 <Grid sx={{ heght:'80%',backgroundColor: '#fff', marginRight: '25px', borderRadius: '10px' }} item xs={4}>
                                     <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                        <DateCalendar value={value} onChange={(newValue) => setValue(newValue)}
-                                            shouldDisableDate={disableRandomDates} />
+                                        <DateCalendar inputFormat="E MMM dd yyyy HH:MM:SS O" value={value} onChange={(newValue) => handleDate(newValue)}
+                                            // shouldDisableDate={disableRandomDates} 
+                                            />
                                     </LocalizationProvider>
                                     <ButtonContainer style={{display:'flex', justifyContent:'space-evenly'}}>
                                     <Button>Go Back</Button>
-                                    <ChannelButton onClick={() => {  dispatch(newAppointment({ 'appointmentTime': time,'appointmentDate': value})); navigate('/channel') }}>Channel</ChannelButton>
+                                    <ChannelButton disabled={!appointment.value.data.appointmentTime && !appointment.value.data.appointmentDate } onClick={() => {  navigate('/channel') }}>Channel</ChannelButton>
 
                                     </ButtonContainer>
 
@@ -399,31 +411,31 @@ const DoctorPage = () => {
                                         aria-label="text time"
                                         sx={{ display: 'flex', flexWrap: 'wrap' }}
                                     >
-                                        <ToggleButton sx={{ marginBottom: '15px', border: '2px solid #808080' }} value="0800">
+                                        <ToggleButton sx={{ marginBottom: '15px', border: '2px solid #808080' }} value="8:00 AM">
                                             8:00 AM
                                         </ToggleButton>
-                                        <ToggleButton sx={{ marginBottom: '15px', border: '2px solid #808080' }} value="0830">
+                                        <ToggleButton sx={{ marginBottom: '15px', border: '2px solid #808080' }} value="8:30 AM">
                                             8:30 AM
                                         </ToggleButton>
-                                        <ToggleButton sx={{ marginBottom: '15px', border: '2px solid #808080' }} value="0900" aria-label="right aligned">
+                                        <ToggleButton sx={{ marginBottom: '15px', border: '2px solid #808080' }} value="9:00 AM" aria-label="right aligned">
                                             9:00 AM
                                         </ToggleButton>
-                                        <ToggleButton sx={{ marginBottom: '15px', border: '2px solid #808080' }} value="0930" aria-label="justified" disabled>
+                                        <ToggleButton sx={{ marginBottom: '15px', border: '2px solid #808080' }} value="9:30 AM" aria-label="justified" disabled>
                                             9:30 AM
                                         </ToggleButton>
-                                        <ToggleButton sx={{ marginBottom: '15px', border: '2px solid #808080' }} value="1000" aria-label="left aligned">
+                                        <ToggleButton sx={{ marginBottom: '15px', border: '2px solid #808080' }} value="10:00 AM" aria-label="left aligned">
                                             10:00 AM
                                         </ToggleButton>
-                                        <ToggleButton sx={{ marginBottom: '15px', border: '2px solid #808080' }} value="1030" aria-label="centered">
+                                        <ToggleButton sx={{ marginBottom: '15px', border: '2px solid #808080' }} value="10:30 AM" aria-label="centered">
                                             10:30 AM
                                         </ToggleButton>
-                                        <ToggleButton sx={{ marginBottom: '15px', border: '2px solid #808080' }} value="1100" aria-label="right aligned">
+                                        <ToggleButton sx={{ marginBottom: '15px', border: '2px solid #808080' }} value="11:00 AM" aria-label="right aligned">
                                             11:00 AM
                                         </ToggleButton>
-                                        <ToggleButton sx={{ marginBottom: '15px', border: '2px solid #808080' }} value="1130" aria-label="justified" disabled>
+                                        <ToggleButton sx={{ marginBottom: '15px', border: '2px solid #808080' }} value="11:30 AM" aria-label="justified" disabled>
                                             11:30 AM
                                         </ToggleButton>
-                                        <ToggleButton sx={{ marginBottom: '15px', border: '2px solid #808080' }} value="1200" aria-label="left aligned">
+                                        <ToggleButton sx={{ marginBottom: '15px', border: '2px solid #808080' }} value="12:00 AM" aria-label="left aligned">
                                             12:00 PM
                                         </ToggleButton>
                                     </StyledToggleButtonGroup>
@@ -437,31 +449,31 @@ const DoctorPage = () => {
                                         aria-label="text time"
                                         sx={{ display: 'flex', flexWrap: 'wrap' }}
                                     >
-                                        <ToggleButton sx={{ marginBottom: '15px', border: '2px solid #808080' }} value="0200">
+                                        <ToggleButton sx={{ marginBottom: '15px', border: '2px solid #808080' }} value="2:00 PM">
                                             2:00 PM
                                         </ToggleButton>
-                                        <ToggleButton sx={{ marginBottom: '15px', border: '2px solid #808080' }} value="0230">
+                                        <ToggleButton sx={{ marginBottom: '15px', border: '2px solid #808080' }} value="2:30 PM">
                                             2:30 PM
                                         </ToggleButton>
-                                        <ToggleButton sx={{ marginBottom: '15px', border: '2px solid #808080' }} value="0300" aria-label="right aligned">
+                                        <ToggleButton sx={{ marginBottom: '15px', border: '2px solid #808080' }} value="3:00 PM" aria-label="right aligned">
                                             3:00 PM
                                         </ToggleButton>
-                                        <ToggleButton sx={{ marginBottom: '15px', border: '2px solid #808080' }} value="0330" aria-label="justified" disabled>
+                                        <ToggleButton sx={{ marginBottom: '15px', border: '2px solid #808080' }} value="3:30 PM" aria-label="justified" disabled>
                                             3:30 PM
                                         </ToggleButton>
-                                        <ToggleButton sx={{ marginBottom: '15px', border: '2px solid #808080' }} value="0400" aria-label="left aligned">
+                                        <ToggleButton sx={{ marginBottom: '15px', border: '2px solid #808080' }} value="4:00 PM" aria-label="left aligned">
                                             4:00 PM
                                         </ToggleButton>
-                                        <ToggleButton sx={{ marginBottom: '15px', border: '2px solid #808080' }} value="0430" aria-label="centered">
+                                        <ToggleButton sx={{ marginBottom: '15px', border: '2px solid #808080' }} value="4:30 PM" aria-label="centered">
                                             4:30 PM
                                         </ToggleButton>
-                                        <ToggleButton sx={{ marginBottom: '15px', border: '2px solid #808080' }} value="0500" aria-label="right aligned">
+                                        <ToggleButton sx={{ marginBottom: '15px', border: '2px solid #808080' }} value="5:00 PM" aria-label="right aligned">
                                             5:00 PM
                                         </ToggleButton>
-                                        <ToggleButton sx={{ marginBottom: '15px', border: '2px solid #808080' }} value="0530" aria-label="justified" disabled>
+                                        <ToggleButton sx={{ marginBottom: '15px', border: '2px solid #808080' }} value="5:30 PM" aria-label="justified" disabled>
                                             5:30 AM
                                         </ToggleButton>
-                                        <ToggleButton sx={{ marginBottom: '15px', border: '2px solid #808080' }} value="0600" aria-label="left aligned">
+                                        <ToggleButton sx={{ marginBottom: '15px', border: '2px solid #808080' }} value="6:00 PM" aria-label="left aligned">
                                             6:00 PM
                                         </ToggleButton>
                                     </StyledToggleButtonGroup>
@@ -483,7 +495,7 @@ const DoctorPage = () => {
                                 </Grid>
 
                                 <Grid sx={{ backgroundColor: '#fff', marginLeft: '25px', marginTop: '50px', borderRadius: '10px', padding: '25px' }} item xs={7}>
-                                    <ReviewsTitle>Reviews for Dr. Gaia Kodithuwakku (154)</ReviewsTitle>
+                                    <ReviewsTitle>Reviews for {appointment.value.data.doctorName} (154)</ReviewsTitle>
                                     <Image src="https://i.ibb.co/5MKt97r/Group-360.png" />
 
                                     <Divider style={{ marginTop: "25px" }} />
