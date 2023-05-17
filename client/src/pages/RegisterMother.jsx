@@ -21,6 +21,10 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import api from "../api";
+import { useSelector, useDispatch } from 'react-redux';
+import jwt_decode from 'jwt-decode'
+import { login, userInfo } from '../redux/user';
+import { useNavigate } from "react-router-dom";
 
 // import API from './../api'
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -176,6 +180,8 @@ const RegisterMother = () => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarType, setSnackbarType] = useState("");
   const [snackbarMsg, setSnackbarMsg] = useState("");
+  let navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleOpenSnackbar = () => {
     setOpenSnackbar(true);
@@ -213,8 +219,20 @@ const RegisterMother = () => {
           handleOpenSnackbar();
         } else {
           try {
-            const result = await api.post("user/create", userDetails);
-            console.log("result", result);
+            const res = await api.post("user/create", userDetails);
+            console.log("res", res);
+            let loginBody = {
+              email : userDetails.email,
+              password: userDetails.password
+            }
+            const result = await api.post('user/validate', loginBody)
+            navigate('/')
+
+            let decodedToken = jwt_decode(result.data.token)
+            localStorage.setItem('token', result.data.token)
+            localStorage.setItem('userInfo', JSON.stringify(result.data.userDetails))
+            dispatch(login({ 'fullName': decodedToken.fullName, 'email': decodedToken.email }))
+            dispatch(userInfo(result.data.userDetails))
             setUserDetails({
               fullName: "",
               email: "",
@@ -225,9 +243,12 @@ const RegisterMother = () => {
               pregnancyDate: dayjs("2022-04-17"),
             });
             setConfirmPassword("");
+
             setSnackbarType("success");
             setSnackbarMsg("User Created Successfully");
             handleOpenSnackbar();
+            navigate('/')
+
           } catch (error) {
             setSnackbarType("error");
             setSnackbarMsg(error.response.data.message);

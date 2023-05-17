@@ -10,6 +10,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Grid from '@mui/material/Grid';
 import Avatar from '@mui/material/Avatar';
 import API from '../api';
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   width: 100vw;
@@ -127,6 +128,8 @@ background-color: #fff ;
 `;
 const Instructors = () => {
     const [instructors, setInstructors] = useState([])
+    let navigate = useNavigate();
+
     useEffect(() => {
         const getInstructors = async () => {
             try {
@@ -160,7 +163,7 @@ const Instructors = () => {
                                 <DescriptionField>
                                     {item.description ? item.description : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras finibus vestibulum felis, sit amet pretium risus rhoncus eu. Donec pellentesque fermentum sapien. Proin hendrerit commodo purus, vel sollicitudin velit lacinia in. Nullam sodales viverra neque, id consectetur mauris tincidunt eu. Praesent ut placerat dolor. Etiam sed elementum dolor. Ut iaculis massa at sem blandit mollis. In lacus est, elementum sed tortor sit amet, tincidunt convallis risus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed ut sodales sapien, sed pharetra purus."} </DescriptionField>
                                 <FlexBox>
-                                    <Button>View Profile</Button>
+                                    <Button  onClick={() => { navigate(`/instructor/${item._id}`) }} >View Profile</Button>
                                 </FlexBox>
                             </Grid>))}
 

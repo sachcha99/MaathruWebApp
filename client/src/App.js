@@ -21,6 +21,7 @@ import ReadingMaterials from "./pages/ReadingMaterials";
 import UserProfile from "./pages/UserProfile";
 import Dashboard from "./pages/Dashboard";
 import PrivateRoutes from './utils/PrivateRoutes'
+import Instructor from "./pages/Instructor";
 
 const store = configureStore({
   reducer: {
@@ -40,6 +41,7 @@ function App() {
               <Route path="/yogaTips" exact element={<YogaTips />} />
               <Route path="/mealPlans" exact element={<MealPlans />} />
               <Route path="/instructors" exact element={<Instructors />} />
+              <Route path="/instructor/:id" exact element={<Instructor />} />
               <Route path="/channelDoc" exact element={<ChannelADoctor />} />
               <Route path="/doctor" exact element={<DoctorPage />} />
               <Route path="/channel" exact element={<Channel />} />
