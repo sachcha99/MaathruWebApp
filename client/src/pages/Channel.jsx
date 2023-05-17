@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect} from 'react'
 import Footer from '../components/Footer'
 import styled from "styled-components";
 import Accordion from '@mui/material/Accordion';
@@ -334,9 +334,18 @@ const Channel = () => {
 
     const [alignment, setAlignment] = React.useState('left');
     const [formats, setFormats] = React.useState(() => ['italic']);
-    const [userDetails, setUserDetails] = useState({ fullName: "", email: "", userType: "mother", password: "", confirmPassword: "", address: "", birthDate: dayjs('2022-04-17'), mobileNo: "", pregnancyDate: dayjs('2022-04-17') })
+    const [userDetails, setUserDetails] = useState({ fullName: "", email: "",birthDate: dayjs('2022-04-17'), mobileNo: "", pregnancyDate: dayjs('2022-04-17') })
     const [pregnancyDate, setPregnancyDate] = useState("")
     const userInfoDetails = JSON.parse(localStorage.getItem("userInfo"));
+    console.log("userInfoDetails:::",userInfoDetails)
+
+    useEffect(() => {
+        if (userInfoDetails) {
+            setUserDetails({ fullName: userInfoDetails.fullName, email: userInfoDetails.email, birthDate: dayjs(userInfoDetails.birthDate.split('T')[0]), mobileNo: userInfoDetails.mobileNo, pregnancyDate: dayjs(userInfoDetails.pregnancyDate.split('T')[0]) })
+            dispatch(newAppointment({ ...appointment.value.data, patientFullName: userInfoDetails.fullName, patientEmail: userInfoDetails.email, patientBirthDate: (dayjs(userInfoDetails.birthDate.split('T')[0])).$d.toISOString().split('T')[0], patientMobileNo: userInfoDetails.mobileNo, patientPregnancyDate: (dayjs(userInfoDetails.pregnancyDate.split('T')[0])).$d.toISOString().split('T')[0] }))
+
+        }
+    }, []);
 
     const handleBirthdate = (value) => {
         console.log("value::", value.$d.toISOString().split('T')[0]);

@@ -123,20 +123,26 @@ const Navbar = () => {
     <NavbarContainer>
       <Wrapper>
         <Left>
-          <Link style={{ textDecoration: "none" }} to="/">
+          {userInfoDetails?.userType !== "instructor" ? <Link style={{ textDecoration: "none" }} to="/">
             <LogoImg src="https://i.ibb.co/rcGdSJP/Component-1-1.png" />
           </Link>
+          :< Link style={{ textDecoration: "none" }} >
+            <LogoImg src="https://i.ibb.co/rcGdSJP/Component-1-1.png" />
+          </Link>}
         </Left>
         <Right>
-          <Link style={{ textDecoration: "none" }} to="/">
-            <MenuItm>HOME</MenuItm>
-          </Link>
-          <Link style={{ textDecoration: "none" }} to="/">
-            <MenuItm>SERVICES</MenuItm>
-          </Link>
-          <Link style={{ textDecoration: "none" }} to="/">
-            <MenuItm>ABOUT US</MenuItm>
-          </Link>
+          {userInfoDetails?.userType !== "instructor" && <>
+            <Link style={{ textDecoration: "none" }} to="/">
+              <MenuItm>HOME</MenuItm>
+            </Link>
+            <Link style={{ textDecoration: "none" }} to="/">
+              <MenuItm>SERVICES</MenuItm>
+            </Link>
+            <Link style={{ textDecoration: "none" }} to="/">
+              <MenuItm>ABOUT US</MenuItm>
+            </Link>
+          </>
+          }
           <Box
             sx={{
               flexGrow: 0,

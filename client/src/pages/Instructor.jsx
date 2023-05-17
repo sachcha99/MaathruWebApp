@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 import styled from "styled-components";
@@ -22,8 +22,11 @@ import Divider from '@mui/material/Divider';
 import { createTheme } from '@mui/material/styles';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import CallIcon from '@mui/icons-material/Call';
+import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import ReactPlayer from 'react-player'
+import API from '../api';
 
 const theme = createTheme();
 const StyledToggleButtonGroup = styled(ToggleButtonGroup)(() => ({
@@ -298,12 +301,27 @@ const ChannelButton = styled.button`
     border: 2px solid #956C6E;
     color: #956C6E;  }
 `;
-const InstructorProfile = () => {
+const Instructor = () => {
 
     const userInfoDetails = JSON.parse(localStorage.getItem("userInfo"));
     const [alignment, setAlignment] = React.useState('left');
     const [formats, setFormats] = React.useState(() => ['italic']);
+    const [data, setData] = React.useState();
 
+    let navigate = useNavigate();
+
+    const location = useLocation();
+    const id = location.pathname.split("/")[2];
+    
+    useEffect(() => {
+        const getData = async () => {
+        const result = await API.get(`user/${id}`)
+                console.log("result", result)
+                setData(result.data[0])
+        }
+
+        getData()
+    }, []);
     const handleFormat = (event, newFormats) => {
         setFormats(newFormats);
     };
@@ -328,7 +346,6 @@ const InstructorProfile = () => {
                 <Navbar />
                 <div>
                     <Wrapper>
-                        <Title>Profile</Title>
                         <Stack >
 
                             <Grid container spacing={2}>
@@ -339,7 +356,7 @@ const InstructorProfile = () => {
                                             <FlexBox style={{ borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
                                                 <Avatar sx={{ width: 80, height: 80 }} alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
                                             </FlexBox>
-                                            <InsTitle>{userInfoDetails?.fullName}</InsTitle>
+                                            <InsTitle>{data?.fullName}</InsTitle>
 
                                             <div style={{ display: 'flex', justifyContent: 'space-between', padding: '10px' }}>
                                                 <div style={{ display: 'flex' }}>
@@ -347,7 +364,7 @@ const InstructorProfile = () => {
                                                     <div style={{ display: 'flex', alignItems: 'center', paddingLeft: '10px' }}> From</div>
                                                 </div>
                                                 <div>
-                                                    {userInfoDetails?.address}
+                                                    {data?.address}
                                                 </div>
                                             </div>
 
@@ -357,7 +374,7 @@ const InstructorProfile = () => {
                                                     <div style={{ display: 'flex', alignItems: 'center', paddingLeft: '10px' }}> Contact</div>
                                                 </div>
                                                 <div>
-                                                    {userInfoDetails?.mobileNo}
+                                                    {data?.mobileNo}
                                                 </div>
                                             </div>
 
@@ -367,28 +384,21 @@ const InstructorProfile = () => {
                                                     <div style={{ display: 'flex', alignItems: 'center', paddingLeft: '10px' }}> Email</div>
                                                 </div>
                                                 <div>
-                                                    {userInfoDetails?.email}
+                                                    {data?.email}
                                                 </div>
                                             </div>
 
                                         </CardContainer>
                                     </div>
-                                    <div style={{ height: '220px', backgroundColor: '#fff', marginBottom: '25px', padding: '15px', borderRadius: '10px', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
-
-                                        <DescTitle>Description</DescTitle>
-                                        <div style={{ fontSize: '12px' }}>
-                                            {userInfoDetails?.description}
-                                        </div>
-                                    </div>
                                 </Grid>
-                                <Grid sx={{ marginLeft: '25px', borderRadius: '10px' }} item xs={7}>
-                                    <div style={{ height: '580px', backgroundColor: '#fff', marginBottom: '25px', borderRadius: '10px', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
+                                <Grid sx={{ marginLeft: '25px', borderRadius: '10px', width: "800px" }} item xs={7}>
+                                    <div style={{ height: '300px', backgroundColor: '#fff', marginBottom: '25px', borderRadius: '10px', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
 
                                         <div style={{ fontSize: '20px', color: '#fff', padding: '10px', backgroundColor: '#956C6E', height: '30px', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
                                             <div><b>My Portfolio</b></div>
                                         </div>
-                                        <div style={{ width: "100%" }}>
-                                            <ReactPlayer height={"250px"} width={"800px"} url={userInfoDetails?.portfolio} controls={true} />
+                                        <div style={{ width: "800px" }}>
+                                            <ReactPlayer height={"250px"} width={"800px"} url={data?.portfolio} controls={true} />
                                         </div>
                                     </div>
                                 </Grid>
@@ -399,7 +409,26 @@ const InstructorProfile = () => {
 
                             <Grid container spacing={2}>
                                 <Grid sx={{ marginRight: '25px', borderRadius: '10px' }} item xs={4}>
-                                    
+                                    <div style={{ height: '220px', backgroundColor: '#fff', marginBottom: '25px', padding: '15px', borderRadius: '10px', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
+
+                                        <DescTitle>Description</DescTitle>
+                                        <div style={{ fontSize: '12px' }}>
+                                            {data?.description}
+                                        </div>
+                                    </div>
+                                </Grid>
+                                <Grid sx={{ marginLeft: '25px', borderRadius: '10px' }} item xs={7}>
+                                    <div style={{ height: '250px', backgroundColor: '#fff', marginBottom: '25px', borderRadius: '10px', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
+
+                                        <div style={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                                            <FeedbackTitle>Any Experience with {data?.fullName}</FeedbackTitle>
+                                            <Button>Leave a Feedback</Button>
+                                            <div style={{ fontSize: '14px' }}>
+                                                Your feedback will be only seen by {data?.fullName}
+                                            </div>
+                                        </div>
+
+                                    </div>
                                 </Grid>
 
 
@@ -418,4 +447,4 @@ const InstructorProfile = () => {
     )
 }
 
-export default InstructorProfile;
+export default Instructor;

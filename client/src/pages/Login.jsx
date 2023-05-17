@@ -201,7 +201,7 @@ const Login = () => {
               localStorage.setItem('userInfo', JSON.stringify(result.data.userDetails))
               dispatch(login({ 'fullName': decodedToken.fullName, 'email': decodedToken.email }))
               dispatch(userInfo(result.data.userDetails))
-              navigate('/')
+              navigate('/insProfile')
 
             }
             else if (result.data.userDetails.isVerified && result.data.userDetails.isVerified == "rejected") {
