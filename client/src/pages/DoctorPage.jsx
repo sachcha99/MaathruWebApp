@@ -316,9 +316,12 @@ const DoctorPage = () => {
     }
 
     const handleDate = (value) => {
-        console.log("value::", value.$d.toISOString().split('T')[0]);
+        console.log("value++++-------",value)
+        const date = new Date(value.$d);
+        const formattedDate = date.toLocaleDateString("en-GB");
+        console.log("value::", formattedDate);
         setValue(value)
-        dispatch(newAppointment({ ...appointment.value.data, 'appointmentDate': value.$d.toISOString().split('T')[0] }))
+        dispatch(newAppointment({ ...appointment.value.data, 'appointmentDate': formattedDate}))
         // dispatch(newAppointment({ 'appTime':newTime}))
     };
 

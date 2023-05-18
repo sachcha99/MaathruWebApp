@@ -341,6 +341,7 @@ const Channel = () => {
 
     useEffect(() => {
         if (userInfoDetails) {
+            
             setUserDetails({ fullName: userInfoDetails.fullName, email: userInfoDetails.email, birthDate: dayjs(userInfoDetails.birthDate.split('T')[0]), mobileNo: userInfoDetails.mobileNo, pregnancyDate: dayjs(userInfoDetails.pregnancyDate.split('T')[0]) })
             dispatch(newAppointment({ ...appointment.value.data, patientFullName: userInfoDetails.fullName, patientEmail: userInfoDetails.email, patientBirthDate: (dayjs(userInfoDetails.birthDate.split('T')[0])).$d.toISOString().split('T')[0], patientMobileNo: userInfoDetails.mobileNo, patientPregnancyDate: (dayjs(userInfoDetails.pregnancyDate.split('T')[0])).$d.toISOString().split('T')[0] }))
 
@@ -348,16 +349,21 @@ const Channel = () => {
     }, []);
 
     const handleBirthdate = (value) => {
-        console.log("value::", value.$d.toISOString().split('T')[0]);
+        const date = new Date(value.$d);
+        const formattedDate = date.toLocaleDateString("en-GB");
         setUserDetails({ ...userDetails, birthDate: value })
-        dispatch(newAppointment({ ...appointment.value.data, 'patientBirthDate': value.$d.toISOString().split('T')[0] }))
+        dispatch(newAppointment({ ...appointment.value.data, 'patientBirthDate': formattedDate}))
     };
 
     const handleDate = (value) => {
+        const date = new Date(value.$d);
+        const formattedDate = date.toLocaleDateString("en-GB");
+        console.log("value++++-------",value)
+
         console.log("value::", value.$d.toISOString().split('T')[0]);
-        setPregnancyDate(value.$d.toISOString().split('T')[0]);
+        setPregnancyDate(formattedDate);
         setUserDetails({ ...userDetails, pregnancyDate: value })
-        dispatch(newAppointment({ ...appointment.value.data, 'patientPregnancyDate': value.$d.toISOString().split('T')[0] }))
+        dispatch(newAppointment({ ...appointment.value.data, 'patientPregnancyDate': formattedDate }))
     };
 
     const handleFormat = (event, newFormats) => {
