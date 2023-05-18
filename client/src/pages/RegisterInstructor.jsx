@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import styled from "styled-components";
 import { Uploader } from "uploader";
-import { UploadDropzone } from "react-uploader";
+import { UploadDropzone,UploadButton } from "react-uploader";
 import { Link } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import BadgeIcon from "@mui/icons-material/Badge";
@@ -189,12 +189,14 @@ const FileToolBox = styled.div`
   justify-content: center;
 `;
 
-const UploadButton = styled.button`
-  width: 100px;
+const UploadBtn = styled.button`
+  width: 180px;
   border: none;
+  margin: 25px;
   padding: 15px 20px;
-  background-color: #956c6e;
+  background-color: #af526d;
   color: #feeced;
+  border-radius:10px;
   font-size: 17px;
   font-weight: 600;
   cursor: pointer;
@@ -652,7 +654,29 @@ const RegisterInstructor = () => {
           >
             Upload Reports
           </Typography>
-          <UploadDropzone
+          <UploadButton 
+            uploader={Uploader({ apiKey: "free" })} // Required.
+            options={{ multi: false }} // Optional.
+            // onUpdate={}
+                onComplete={(files) => {
+                  // Optional.
+                  if (files.length === 0) {
+                    console.log("No files selected.");
+                  } else {
+                    console.log("Files uploaded:");
+                    console.log(files.map((f) => f.fileUrl));
+                    setImageUrl(files.map((f) => f.fileUrl)[0]);
+                  }
+                }}
+                >
+    {({onClick}) =>
+      <UploadBtn onClick={onClick}>
+        Upload a File
+      </UploadBtn>
+    }
+  </UploadButton>
+          {/* <UploadDropzone
+            style={{backgroundColor: 'red'}}
             uploader={Uploader({ apiKey: "free" })} // Required.
             options={{ multi: false }} // Optional.
             width="90%" // Optional.
@@ -667,7 +691,7 @@ const RegisterInstructor = () => {
                 setImageUrl(files.map((f) => f.fileUrl)[0]);
               }
             }}
-          />
+          /> */}
 
           <ButtonContainer>
             {/* <Button onClick={(e) => handleSubmit(e)}>SIGN UP</Button> */}
